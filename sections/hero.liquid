@@ -1,0 +1,18 @@
+<div class="px-6">
+    <div class=" w-full rounded-xl bg-neutral-700 text-white flex items-center justify-center h-[400px]">
+        <h1>
+            {{ section.settings.title | default: "HERO SECTION" }}
+        </h1>
+    </div>
+
+{% schema %}
+{
+  "name": "Hero",
+  "presets": [
+    {
+      "name": "Hero",
+      "category": "Marketing"
+    }
+  ]
+}
+{% endschema %}
