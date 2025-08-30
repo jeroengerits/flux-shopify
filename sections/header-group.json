@@ -1,21 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "type": "header",
-    "name": "Header Group",
-    "sections": {
-        "header": {
-            "name": "Header",
-            "type": "header",
-        },
-        "announcement": {
-            "name": "Announcement",
-            "type": "announcement",
-            "settings": {
-                "announcement_text": "Free shipping on orders in European Union"
-            }
-        }
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement": {
+      "type": "announcement",
+      "disabled": true,
+      "name": "Announcement",
+      "settings": {
+        "announcement_text": "Free shipping on orders in European Union"
+      }
     },
-    "order": [
-        "announcement",
-        "header",
-    ]
+    "header": {
+      "type": "header",
+      "name": "Header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
 }
