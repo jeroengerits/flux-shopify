@@ -1,13 +1,10 @@
 {
-    "name": "Main Group",
-    "sections": {
-        "hero": {
-            "type": "hero",
-            "name": "Hero",
-            "settings": {}
-        }
-    },
-    "order": [
-        "hero"
-    ]
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {}
+    }
+  },
+  "order": ["hero"]
 }

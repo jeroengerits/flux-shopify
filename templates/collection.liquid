@@ -4,111 +4,116 @@
 {% endcomment %}
 
 <div class="min-h-screen ">
-  <!-- Collection Header -->
-  <div class="">
-    <div class="px-6 pb-6">
-      <div class="">
-        <h1 class="text-md font-normal text-neutral-800 mb-2">{{ collection.title }}</h1>
-        {% if collection.description != blank %}
-          <p class="text-sm text-neutral-600 max-w-3xl mx-auto">{{ collection.description }}</p>
-        {% endif %}
-        <p class="text-xs text-neutral-500 mt-2">{{ collection.products.size }} product{% if collection.products.size != 1 %}s{% endif %}</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="px-6">
-    <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {% for product in collection.products %}
-        <div class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
-          <!-- Product Image -->
-          <div class="aspect-square bg-neutral-100">
-            <a href="{{ product.url }}" class="block h-full">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 400, crop: 'center' }}" 
-                     alt="{{ product.featured_image.alt | escape }}" 
-                     loading="lazy"
-                     width="400" 
-                     height="400"
-                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-              {% else %}
-                <div class="w-full h-full flex items-center justify-center text-neutral-400">
-                  <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                </div>
-              {% endif %}
-            </a>
-          </div>
-
-          <!-- Product Info -->
-          <div class="p-4">
-            <!-- Product Type -->
-            {% if product.type != blank %}
-              <p class="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">{{ product.type }}</p>
-            {% endif %}
-
-            <!-- Product Title -->
-            <h3 class="text-lg font-semibold text-neutral-900 mb-2">
-              <a href="{{ product.url }}" class="hover:text-neutral-600 transition-colors line-clamp-2">
-                {{ product.title }}
-              </a>
-            </h3>
-
-            <!-- Product Price -->
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
-                {% if product.compare_at_price > product.price %}
-                  <span class="text-lg font-bold text-neutral-900">{{ product.price | money }}</span>
-                  <span class="text-sm text-neutral-500 line-through">{{ product.compare_at_price | money }}</span>
-                {% else %}
-                  <span class="text-lg font-bold text-neutral-900">{{ product.price | money }}</span>
+    <!-- Collection Header -->
+    <div class="">
+        <div class="px-6 pb-6">
+            <div class="">
+                <h1 class="text-md font-normal text-neutral-800 mb-2">{{ collection.title }}</h1>
+                {% if collection.description != blank %}
+                    <p class="text-sm text-neutral-600 max-w-3xl mx-auto">{{ collection.description }}</p>
                 {% endif %}
-              </div>
-              
-              <!-- Sale Badge -->
-              {% if product.compare_at_price > product.price %}
-                <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                <p class="text-xs text-neutral-500 mt-2">{{ collection.products.size }}
+                    product{% if collection.products.size != 1 %}s{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="px-6">
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for product in collection.products %}
+                <div class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
+                    <!-- Product Image -->
+                    <div class="aspect-square bg-neutral-100">
+                        <a href="{{ product.url }}" class="block h-full">
+                            {% if product.featured_image %}
+                                <img src="{{ product.featured_image | image_url: width: 400, crop: 'center' }}"
+                                     alt="{{ product.featured_image.alt | escape }}"
+                                     loading="lazy"
+                                     width="400"
+                                     height="400"
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center text-neutral-400">
+                                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="p-4">
+                        <!-- Product Type -->
+                        {% if product.type != blank %}
+                            <p class="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">{{ product.type }}</p>
+                        {% endif %}
+
+                        <!-- Product Title -->
+                        <h3 class="text-lg font-semibold text-neutral-900 mb-2">
+                            <a href="{{ product.url }}" class="hover:text-neutral-600 transition-colors line-clamp-2">
+                                {{ product.title }}
+                            </a>
+                        </h3>
+
+                        <!-- Product Price -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                {% if product.compare_at_price > product.price %}
+                                    <span class="text-lg font-bold text-neutral-900">{{ product.price | money }}</span>
+                                    <span class="text-sm text-neutral-500 line-through">{{ product.compare_at_price | money }}</span>
+                                {% else %}
+                                    <span class="text-lg font-bold text-neutral-900">{{ product.price | money }}</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Sale Badge -->
+                            {% if product.compare_at_price > product.price %}
+                                <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
                   Sale
                 </span>
-              {% endif %}
-            </div>
-          </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
-    </div>
 
-    <!-- Pagination -->
-    {% if paginate.pages > 1 %}
-      <div class="mt-12 flex justify-center">
-        <nav class="flex items-center space-x-2">
-          {% if paginate.previous %}
-            <a href="{{ paginate.previous.url }}" class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
-              Previous
-            </a>
-          {% endif %}
+        <!-- Pagination -->
+        {% if paginate.pages > 1 %}
+            <div class="mt-12 flex justify-center">
+                <nav class="flex items-center space-x-2">
+                    {% if paginate.previous %}
+                        <a href="{{ paginate.previous.url }}"
+                           class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+                            Previous
+                        </a>
+                    {% endif %}
 
-          {% for part in paginate.parts %}
-            {% if part.is_link %}
-              <a href="{{ part.url }}" class="px-3 py-2 text-sm text-neutral-700 hover:text-neutral-900 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
-                {{ part.title }}
-              </a>
-            {% else %}
-              <span class="px-3 py-2 text-sm text-neutral-500 bg-neutral-100 border border-neutral-300 rounded-md">
+                    {% for part in paginate.parts %}
+                        {% if part.is_link %}
+                            <a href="{{ part.url }}"
+                               class="px-3 py-2 text-sm text-neutral-700 hover:text-neutral-900 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+                                {{ part.title }}
+                            </a>
+                        {% else %}
+                            <span class="px-3 py-2 text-sm text-neutral-500 bg-neutral-100 border border-neutral-300 rounded-md">
                 {{ part.title }}
               </span>
-            {% endif %}
-          {% endfor %}
+                        {% endif %}
+                    {% endfor %}
 
-          {% if paginate.next %}
-            <a href="{{ paginate.next.url }}" class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
-              Next
-            </a>
-          {% endif %}
-        </nav>
-      </div>
-    {% endif %}
-  </div>
+                    {% if paginate.next %}
+                        <a href="{{ paginate.next.url }}"
+                           class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+                            Next
+                        </a>
+                    {% endif %}
+                </nav>
+            </div>
+        {% endif %}
+    </div>
 </div>

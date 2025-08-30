@@ -1,13 +1,72 @@
-<div class="px-6">
-    <div class=" w-full rounded-xl bg-neutral-700 text-white flex items-center justify-center h-[400px]">
-        <h1>
-            {{ section.settings.title | default: "HERO SECTION" }}
-        </h1>
+<div class="relative overflow-hidden">
+    <!-- Background Image/Color -->
+    <div class="absolute inset-0 bg-neutral-900">
+        {% if section.settings.background_image %}
+            <img src="{{ section.settings.background_image | image_url: width: 1920 }}"
+                 alt="{{ section.settings.background_image.alt | escape }}"
+                 width="1920"
+                 height="1080"
+                 class="w-full h-full object-cover opacity-40">
+        {% endif %}
     </div>
+
+    <!-- Content Overlay -->
+    <div class="relative z-10 p-6 text-white">
+        ssss
+    </div>
+
+</div>
 
 {% schema %}
 {
   "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "Discover Amazing Products"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Shop our curated collection of premium products with exceptional quality and unbeatable prices."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_indicators",
+      "label": "Show Trust Indicators",
+      "default": true
+    }
+  ],
   "presets": [
     {
       "name": "Hero",
