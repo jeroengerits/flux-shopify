@@ -13,7 +13,6 @@
   "sections": {
     "announcement": {
       "type": "announcement",
-      "disabled": true,
       "name": "Announcement",
       "settings": {
         "announcement_text": "Free shipping on orders in European Union"
