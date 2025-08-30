@@ -5,9 +5,17 @@
         "header": {
             "name": "Header",
             "type": "header",
+        },
+        "announcement": {
+            "name": "Announcement",
+            "type": "announcement",
+            "settings": {
+                "announcement_text": "Free shipping on orders in European Union"
+            }
         }
     },
     "order": [
-        "header"
+        "announcement",
+        "header",
     ]
 }
