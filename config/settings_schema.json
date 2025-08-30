@@ -1,10 +1,10 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Pulse",
+    "theme_name": "Flux",
     "theme_version": "0.0.1",
     "theme_author": "Jeroen Gerits",
-    "theme_support_email": "jeroen@pulse.com",
-    "theme_documentation_url": "https://pulse.com/docs"
+    "theme_support_email": "jeroen@gerits.email",
+    "theme_documentation_url": "https://github.com/jeroengerits/flux-shopify"
   }
 ]
