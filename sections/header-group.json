@@ -11,18 +11,12 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "announcement": {
-      "type": "announcement",
-      "name": "Announcement",
-      "settings": {
-        "announcement_text": "Free shipping on orders in European Union"
-      }
-    },
+   
     "header": {
       "type": "header",
       "name": "Header",
       "settings": {}
     }
   },
-  "order": ["announcement", "header"]
+  "order": ["header"]
 }
