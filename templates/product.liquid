@@ -1,0 +1,32 @@
+<div class="flex flex-col items-start md:flex-row gap-12 px-6">
+    <div class="w-full md:w-1/2">
+        <img class="rounded-xl w-full" src="{{ product.featured_image | image_url: width: 400 }}"
+             alt="{{ product.featured_image.alt }}">
+    </div>
+    <div class="flex gap-2 flex-col w-full md:w-1/2 md:pt-6 md:pr-6">
+        <h1 class="text-xl font-medium  whitespace-nowrap text-neutral-800">
+            {{ product.title }}
+        </h1>
+        <div class="text-base text-neutral-500 mb-2">
+            <p>
+                {{ product.type }}
+            </p>
+        </div>
+        <div class="text-3xl  font-bold  whitespace-nowrap text-neutral-800">
+            <p>
+                {{ product.price | money }}
+            </p>
+        </div>
+        <div class="text-base text-neutral-500 mb-6 mt-4">
+            <p>
+                {{ product.description }}
+            </p>
+        </div>
+        {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button class="inline-flex px-6 py-4 bg-neutral-700 hover:bg-neutral-800 text-white font-medium text-lg rounded-lg transition-colors duration-200 ">
+                Add to cart
+            </button>
+        {% endform %}
+    </div>
+</div>
