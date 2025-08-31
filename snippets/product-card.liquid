@@ -37,7 +37,7 @@
           {% render 'item-subtitle', text: product.type %}
         </div>
         <div class='flex flex-col items-end'>
-          {% render 'item-price', text: product.price %}
+          {% render 'item-price', amount: product.price, size: 'md', weight: 'semibold', color: 'primary' %}
         </div>
       </div>
     </div>

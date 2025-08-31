@@ -18,9 +18,7 @@
       </p>
     </div>
     <div class='whitespace-nowrap  text-3xl  font-bold text-neutral-800'>
-      <p>
-        {{ product.price | money }}
-      </p>
+      {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
     </div>
     <div class='mb-6 mt-4'>
       {% render 'paragraph', text: product.description %}

@@ -3,7 +3,7 @@
   Usage: {% render 'button', label: 'Click me', variant: 'primary', size: 'md', full_width: false, disabled: false %}
 
   Variants: primary, secondary, outline, ghost
-  Sizes: sm, md, lg, xl
+  Sizes: xs, sm, md, lg, xl, 2xl
 {% endcomment %}
 
 {% assign variant = variant | default: 'primary' %}
@@ -14,6 +14,7 @@
 {% assign class = class | default: '' %}
 {% assign href = href | default: '' %}
 {% assign target = target | default: '' %}
+{% assign name = name | default: '' %}
 
 {% case variant %}
   {% when 'primary' %}
@@ -29,16 +30,27 @@
 {% endcase %}
 
 {% case size %}
+  {% when 'xs' %}
+    {% assign size_classes = 'px-2 py-1 text-xs' %}
+    {% assign icon_size = 'h-3 w-3' %}
   {% when 'sm' %}
     {% assign size_classes = 'px-3 py-1.5 text-sm' %}
+    {% assign icon_size = 'h-4 w-4' %}
   {% when 'md' %}
     {% assign size_classes = 'px-4 py-2 text-sm' %}
+    {% assign icon_size = 'h-4 w-4' %}
   {% when 'lg' %}
     {% assign size_classes = 'px-6 py-3 text-base' %}
+    {% assign icon_size = 'h-5 w-5' %}
   {% when 'xl' %}
     {% assign size_classes = 'px-8 py-4 text-lg' %}
+    {% assign icon_size = 'h-6 w-6' %}
+  {% when '2xl' %}
+    {% assign size_classes = 'px-10 py-5 text-xl' %}
+    {% assign icon_size = 'h-7 w-7' %}
   {% else %}
     {% assign size_classes = 'px-4 py-2 text-sm' %}
+    {% assign icon_size = 'h-4 w-4' %}
 {% endcase %}
 
 {% assign width_class = '' %}
@@ -70,7 +82,7 @@
   >
 {% else %}
   <button
-    class='inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
+    class='inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
     {% if disabled %}
       disabled
     {% endif %}
@@ -82,6 +94,9 @@
     {% endif %}
     {% if type == 'reset' %}
       type='reset'
+    {% endif %}
+    {% if name %}
+      name='{{ name }}'
     {% endif %}
     {% if data_action %}
       data-action='{{ data_action }}'
@@ -95,7 +110,7 @@
   >
 {% endif %}
 {% if icon_left %}
-  <svg class='mr-2 h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+  <svg class='mr-2 {{ icon_size }}' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ icon_left }}"></path>
   </svg>
 {% endif %}
@@ -103,7 +118,7 @@
 {{ label }}
 
 {% if icon_right %}
-  <svg class='ml-2 h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+  <svg class='ml-2 {{ icon_size }}' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ icon_right }}"></path>
   </svg>
 {% endif %}

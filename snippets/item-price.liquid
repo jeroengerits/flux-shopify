@@ -1,3 +1,66 @@
-<div class='text-pretty text-base font-normal text-neutral-700'>
+{% comment %}
+  Item price snippet with multiple size variants
+  Usage: {% render 'item-price', amount: product.price, size: 'md', weight: 'normal', color: 'neutral' %}
+
+  Sizes: xs, sm, md, lg, xl, 2xl
+  Weights: light, normal, medium, semibold, bold
+  Colors: neutral, muted, primary, success, warning, danger
+{% endcomment %}
+
+{% assign size = size | default: 'md' %}
+{% assign weight = weight | default: 'normal' %}
+{% assign color = color | default: 'neutral' %}
+{% assign class = class | default: '' %}
+
+{% case size %}
+  {% when 'xs' %}
+    {% assign size_classes = 'text-xs' %}
+  {% when 'sm' %}
+    {% assign size_classes = 'text-sm' %}
+  {% when 'md' %}
+    {% assign size_classes = 'text-base' %}
+  {% when 'lg' %}
+    {% assign size_classes = 'text-lg' %}
+  {% when 'xl' %}
+    {% assign size_classes = 'text-xl' %}
+  {% when '2xl' %}
+    {% assign size_classes = 'text-2xl' %}
+  {% else %}
+    {% assign size_classes = 'text-base' %}
+{% endcase %}
+
+{% case weight %}
+  {% when 'light' %}
+    {% assign weight_classes = 'font-light' %}
+  {% when 'normal' %}
+    {% assign weight_classes = 'font-normal' %}
+  {% when 'medium' %}
+    {% assign weight_classes = 'font-medium' %}
+  {% when 'semibold' %}
+    {% assign weight_classes = 'font-semibold' %}
+  {% when 'bold' %}
+    {% assign weight_classes = 'font-bold' %}
+  {% else %}
+    {% assign weight_classes = 'font-normal' %}
+{% endcase %}
+
+{% case color %}
+  {% when 'neutral' %}
+    {% assign color_classes = 'text-neutral-700' %}
+  {% when 'muted' %}
+    {% assign color_classes = 'text-neutral-500' %}
+  {% when 'primary' %}
+    {% assign color_classes = 'text-neutral-900' %}
+  {% when 'success' %}
+    {% assign color_classes = 'text-green-600' %}
+  {% when 'warning' %}
+    {% assign color_classes = 'text-yellow-600' %}
+  {% when 'danger' %}
+    {% assign color_classes = 'text-red-600' %}
+  {% else %}
+    {% assign color_classes = 'text-neutral-700' %}
+{% endcase %}
+
+<div class='text-pretty {{ size_classes }} {{ weight_classes }} {{ color_classes }} {{ class }}'>
   {{ amount | money }}
 </div>
