@@ -1,0 +1,506 @@
+{% comment %}
+  Design System Snippet
+  Showcases all available snippets and sections as design system examples
+{% endcomment %}
+
+<div class='min-h-screen bg-neutral-50'>
+  <!-- Header -->
+  <div class='border-b border-neutral-200 bg-white'>
+    <div class='px-6 py-8'>
+      <h1 class='mb-2 text-4xl font-bold text-neutral-900'>Design System</h1>
+      <p class='text-lg text-neutral-600'>Complete component library for Flux Shopify theme</p>
+    </div>
+  </div>
+
+  <div class='px-6 py-8'>
+    <!-- Navigation -->
+    <nav class='mb-12'>
+      <div class='flex flex-wrap gap-4'>
+        <a
+          href='#typography'
+          class='rounded-md bg-neutral-900 px-4 py-2 text-white transition-colors hover:bg-neutral-800'
+          >Typography</a
+        >
+        <a
+          href='#buttons'
+          class='rounded-md bg-neutral-100 px-4 py-2 text-neutral-700 transition-colors hover:bg-neutral-200'
+          >Buttons</a
+        >
+        <a
+          href='#components'
+          class='rounded-md bg-neutral-100 px-4 py-2 text-neutral-700 transition-colors hover:bg-neutral-200'
+          >Components</a
+        >
+        <a
+          href='#sections'
+          class='rounded-md bg-neutral-100 px-4 py-2 text-neutral-700 transition-colors hover:bg-neutral-200'
+          >Sections</a
+        >
+      </div>
+    </nav>
+
+    <!-- Typography Section -->
+    <section id='typography' class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Typography</h2>
+
+        <div class='space-y-6'>
+          <div>
+            <h1 class='mb-2 text-4xl font-bold text-neutral-900'>Heading 1 (text-4xl font-bold)</h1>
+            <p class='text-sm text-neutral-500'>Used for main page titles</p>
+          </div>
+
+          <div>
+            <h2 class='mb-2 text-2xl font-bold text-neutral-900'>Heading 2 (text-2xl font-bold)</h2>
+            <p class='text-sm text-neutral-500'>Used for section titles</p>
+          </div>
+
+          <div>
+            <h3 class='mb-2 text-xl font-semibold text-neutral-900'>Heading 3 (text-xl font-semibold)</h3>
+            <p class='text-sm text-neutral-500'>Used for subsection titles</p>
+          </div>
+
+          <div>
+            <p class='mb-2 text-base text-neutral-700'>Body text (text-base text-neutral-700)</p>
+            <p class='text-sm text-neutral-500'>Standard paragraph text</p>
+          </div>
+
+          <div>
+            <p class='mb-2 text-sm text-neutral-500'>Small text (text-sm text-neutral-500)</p>
+            <p class='text-sm text-neutral-500'>Used for captions and secondary information</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons Section -->
+    <section id='buttons' class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Buttons</h2>
+
+        <div class='space-y-8'>
+          <!-- Button Variants -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Button Variants</h3>
+            <div class='flex flex-wrap gap-4'>
+              {% render 'button', label: 'Primary Button', variant: 'primary', size: 'md' %}
+              {% render 'button', label: 'Secondary Button', variant: 'secondary', size: 'md' %}
+              {% render 'button', label: 'Outline Button', variant: 'outline', size: 'md' %}
+              {% render 'button', label: 'Ghost Button', variant: 'ghost', size: 'md' %}
+            </div>
+          </div>
+
+          <!-- Button Sizes -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Button Sizes</h3>
+            <div class='flex flex-wrap items-center gap-4'>
+              {% render 'button', label: 'Extra Small', variant: 'primary', size: 'xs' %}
+              {% render 'button', label: 'Small', variant: 'primary', size: 'sm' %}
+              {% render 'button', label: 'Medium', variant: 'primary', size: 'md' %}
+              {% render 'button', label: 'Large', variant: 'primary', size: 'lg' %}
+              {% render 'button', label: 'Extra Large', variant: 'primary', size: 'xl' %}
+              {% render 'button', label: '2XL', variant: 'primary', size: '2xl' %}
+            </div>
+          </div>
+
+          <!-- Button States -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Button States</h3>
+            <div class='flex flex-wrap gap-4'>
+              {% render 'button', label: 'Normal Button', variant: 'primary', size: 'md' %}
+              {% render 'button', label: 'Disabled Button', variant: 'primary', size: 'md', disabled: true %}
+              {% render 'button', label: 'Full Width', variant: 'primary', size: 'md', full_width: true %}
+            </div>
+          </div>
+
+          <!-- Button as Link -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Button as Link</h3>
+            <div class='flex flex-wrap gap-4'>
+              {% render 'button', label: 'Shop Now', variant: 'primary', size: 'md', href: '/collections/all' %}
+              {% render 'button', label: 'Learn More', variant: 'outline', size: 'md', href: '/pages/about' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components Section -->
+    <section id='components' class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Components</h2>
+
+        <div class='space-y-8'>
+          <!-- Section Title -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Section Title</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% render 'section-title', text: 'Example Section Title' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage: {% raw %}{% render 'section-title', text: 'Your Title' %}{% endraw %}
+            </p>
+          </div>
+
+          <!-- Item Title -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Item Title</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% render 'item-title', text: 'Example Product Title' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage: {% raw %}{% render 'item-title', text: 'Your Title' %}{% endraw %}
+            </p>
+          </div>
+
+          <!-- Item Subtitle -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Item Subtitle</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% render 'item-subtitle', text: 'Example Product Subtitle' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage: {% raw %}{% render 'item-subtitle', text: 'Your Subtitle' %}{% endraw %}
+            </p>
+          </div>
+
+          <!-- Item Price -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Item Price</h3>
+            <div class='space-y-4 rounded-lg bg-neutral-50 p-6'>
+              <div>
+                <span class='text-sm text-neutral-500'>Small:</span>
+                {% render 'item-price', amount: 2999, size: 'sm' %}
+              </div>
+              <div>
+                <span class='text-sm text-neutral-500'>Medium:</span>
+                {% render 'item-price', amount: 2999, size: 'md' %}
+              </div>
+              <div>
+                <span class='text-sm text-neutral-500'>Large:</span>
+                {% render 'item-price', amount: 2999, size: 'lg' %}
+              </div>
+              <div>
+                <span class='text-sm text-neutral-500'>With weight and color:</span>
+                {% render 'item-price', amount: 2999, size: 'lg', weight: 'bold', color: 'primary' %}
+              </div>
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage:
+              {% raw %}{% render 'item-price', amount: price, size: 'md', weight: 'semibold', color: 'primary' %}{% endraw %}
+            </p>
+          </div>
+
+          <!-- Paragraph -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Paragraph</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% render 'paragraph',
+                text: 'This is an example paragraph component that demonstrates how text content is displayed using the paragraph snippet.'
+              %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage: {% raw %}{% render 'paragraph', text: 'Your paragraph text' %}{% endraw %}
+            </p>
+          </div>
+
+          <!-- Product Card -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Product Card</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% if all_products.first %}
+                {% render 'product-card', product: all_products.first %}
+              {% else %}
+                <div class='rounded-lg border border-neutral-200 bg-white p-6 text-center'>
+                  <p class='text-neutral-500'>No products available for demo</p>
+                </div>
+              {% endif %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>
+              Usage: {% raw %}{% render 'product-card', product: product %}{% endraw %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections Section -->
+    <section id='sections' class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Sections</h2>
+
+        <div class='space-y-8'>
+          <!-- Hero Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Hero Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% section 'hero' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'hero' %}{% endraw %}</p>
+          </div>
+
+          <!-- Announcement Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Announcement Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              <div class='rounded-lg border border-neutral-300 bg-white p-3 text-center'>
+                <p class='text-sm font-medium text-neutral-500'>Free shipping on orders over $100</p>
+              </div>
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'announcement' %}{% endraw %}</p>
+            <p class='mt-1 text-xs text-neutral-400'>
+              Note: This section requires announcement_text setting in theme customizer
+            </p>
+          </div>
+
+          <!-- Demo Products Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Demo Products Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% section 'demo-products' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'demo-products' %}{% endraw %}</p>
+          </div>
+
+          <!-- Collection Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Collection Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% section 'collection' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'collection' %}{% endraw %}</p>
+          </div>
+
+          <!-- Header Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Header Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% section 'header' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'header' %}{% endraw %}</p>
+          </div>
+
+          <!-- Footer Section -->
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Footer Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              {% section 'footer' %}
+            </div>
+            <p class='mt-2 text-sm text-neutral-500'>Usage: {% raw %}{% section 'footer' %}{% endraw %}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Palette -->
+    <section class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Color Palette</h2>
+
+        <div class='grid grid-cols-2 gap-6 md:grid-cols-4'>
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Neutral Colors</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded border border-neutral-200 bg-neutral-50'></div>
+                <span class='text-sm'>neutral-50</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded border border-neutral-200 bg-neutral-100'></div>
+                <span class='text-sm'>neutral-100</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-200'></div>
+                <span class='text-sm'>neutral-200</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-500'></div>
+                <span class='text-sm text-white'>neutral-500</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-700'></div>
+                <span class='text-sm text-white'>neutral-700</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-900'></div>
+                <span class='text-sm text-white'>neutral-900</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Text Colors</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-900'></div>
+                <span class='text-sm'>text-neutral-900</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-700'></div>
+                <span class='text-sm text-white'>text-neutral-700</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-500'></div>
+                <span class='text-sm text-white'>text-neutral-500</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Interactive Colors</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded border border-neutral-300 bg-white'></div>
+                <span class='text-sm'>bg-white</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded border border-neutral-300 bg-transparent'></div>
+                <span class='text-sm'>bg-transparent</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Status Colors</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-green-500'></div>
+                <span class='text-sm text-white'>Success</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-red-500'></div>
+                <span class='text-sm text-white'>Error</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-yellow-500'></div>
+                <span class='text-sm text-white'>Warning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing Scale -->
+    <section class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Spacing Scale</h2>
+
+        <div class='grid grid-cols-2 gap-6 md:grid-cols-4'>
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Padding & Margin</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-4 w-4 rounded bg-neutral-200'></div>
+                <span class='text-sm'>p-1 (0.25rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-6 w-6 rounded bg-neutral-200'></div>
+                <span class='text-sm'>p-2 (0.5rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-200'></div>
+                <span class='text-sm'>p-4 (1rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-12 w-12 rounded bg-neutral-200'></div>
+                <span class='text-sm'>p-6 (1.5rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-16 w-16 rounded bg-neutral-200'></div>
+                <span class='text-sm'>p-8 (2rem)</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Gap</h3>
+            <div class='space-y-2'>
+              <div class='flex items-center gap-3'>
+                <div class='h-2 w-2 rounded bg-neutral-200'></div>
+                <span class='text-sm'>gap-1 (0.25rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-4 w-4 rounded bg-neutral-200'></div>
+                <span class='text-sm'>gap-2 (0.5rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-6 w-6 rounded bg-neutral-200'></div>
+                <span class='text-sm'>gap-4 (1rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-8 w-8 rounded bg-neutral-200'></div>
+                <span class='text-sm'>gap-6 (1.5rem)</span>
+              </div>
+              <div class='flex items-center gap-3'>
+                <div class='h-12 w-12 rounded bg-neutral-200'></div>
+                <span class='text-sm'>gap-8 (2rem)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Examples -->
+    <section class='mb-16'>
+      <div class='rounded-lg border border-neutral-200 bg-white p-8'>
+        <h2 class='mb-6 text-2xl font-bold text-neutral-900'>Usage Examples</h2>
+
+        <div class='space-y-6'>
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Complete Product Card</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              <div class='max-w-sm'>
+                <div class='overflow-hidden rounded-lg border border-neutral-200 bg-white'>
+                  <div class='flex aspect-square items-center justify-center bg-neutral-100'>
+                    <span class='text-neutral-400'>Product Image</span>
+                  </div>
+                  <div class='p-4'>
+                    {% render 'item-title', text: 'Example Product' %}
+                    {% render 'item-subtitle', text: 'Product Category' %}
+                    <div class='mt-2'>
+                      {% render 'item-price', amount: 2999, size: 'lg', weight: 'semibold' %}
+                    </div>
+                    <div class='mt-4'>
+                      {% render 'button', label: 'Add to Cart', variant: 'primary', size: 'md', full_width: true %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class='mb-4 text-lg font-semibold text-neutral-900'>Form Section</h3>
+            <div class='rounded-lg bg-neutral-50 p-6'>
+              <div class='max-w-md'>
+                {% render 'section-title', text: 'Contact Form' %}
+                <form class='space-y-4'>
+                  <div>
+                    <label class='mb-2 block text-sm font-medium text-neutral-700'>Name</label>
+                    <input
+                      type='text'
+                      class='w-full rounded-md border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500'
+                    >
+                  </div>
+                  <div>
+                    <label class='mb-2 block text-sm font-medium text-neutral-700'>Email</label>
+                    <input
+                      type='email'
+                      class='w-full rounded-md border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500'
+                    >
+                  </div>
+                  <div class='flex gap-3'>
+                    {% render 'button', label: 'Submit', variant: 'primary', size: 'md', type: 'submit' %}
+                    {% render 'button', label: 'Cancel', variant: 'outline', size: 'md' %}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
