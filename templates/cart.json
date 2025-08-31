@@ -11,12 +11,17 @@
   "sections": {
     "breadcrumb": {
       "type": "breadcrumb",
-      "name": "Breadcrumb"
+      "name": "Breadcrumb",
+      "settings": {}
     },
     "cart": {
       "type": "cart",
-      "name": "Cart"
+      "name": "Cart",
+      "settings": {}
     }
   },
-  "order": ["breadcrumb", "cart"]
+  "order": [
+    "breadcrumb",
+    "cart"
+  ]
 }

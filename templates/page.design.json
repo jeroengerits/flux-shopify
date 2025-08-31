@@ -8,16 +8,20 @@
  * ------------------------------------------------------------
  */
 {
-  "name": "Design System Page",
   "sections": {
     "breadcrumb": {
       "type": "breadcrumb",
-      "name": "Breadcrumb"
+      "name": "Breadcrumb",
+      "settings": {}
     },
     "page": {
       "type": "design",
-      "name": "Page Design"
+      "name": "Page Design",
+      "settings": {}
     }
   },
-  "order": ["breadcrumb", "page"]
+  "order": [
+    "breadcrumb",
+    "page"
+  ]
 }
