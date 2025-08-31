@@ -14,11 +14,18 @@
       "name": "Breadcrumbs",
       "settings": {}
     },
+    "spacer": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "cart": {
       "type": "cart",
       "name": "Cart",
       "settings": {}
     }
   },
-  "order": ["breadcrumbs", "cart"]
+  "order": ["breadcrumbs", "spacer", "cart"]
 }
