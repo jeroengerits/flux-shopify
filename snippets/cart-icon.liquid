@@ -1,0 +1,32 @@
+{% comment %}
+  Shopping Cart Icon Snippet
+  Usage: {% render 'cart-icon', amount: cart.item_count, show_label: true %}
+
+  Parameters:
+  - amount: Number of items in cart (default: 0)
+  - show_label: Whether to show the amount label (default: true)
+{% endcomment %}
+
+{% assign amount = amount | default: 0 %}
+{% assign show_label = show_label | default: true %}
+
+<div class='relative inline-flex items-center'>
+  <!-- Cart Icon -->
+  <div class='relative'>
+    <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+    </svg>
+
+    <!-- Amount Badge -->
+    {% if show_label and amount > 0 %}
+      <div class='bg-brand-primary absolute -right-2.5 -top-2.5 flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold text-white'>
+        {% if amount > 99 %}
+          <span>99+</span>
+        {% else %}
+          <span>{{ amount }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

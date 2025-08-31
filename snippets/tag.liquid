@@ -13,15 +13,15 @@
 
 {% case variant %}
   {% when 'default' %}
-    {% assign variant_classes = 'inline-block rounded-lg' %}
+    {% assign variant_classes = 'inline-block rounded-sm' %}
   {% when 'rounded' %}
-    {% assign variant_classes = 'inline-block rounded' %}
+    {% assign variant_classes = 'inline-block rounded-lg' %}
   {% when 'pill' %}
     {% assign variant_classes = 'inline-block rounded-full' %}
   {% when 'outline' %}
-    {% assign variant_classes = 'inline-block border rounded-lg' %}
+    {% assign variant_classes = 'inline-block border rounded-sm' %}
   {% else %}
-    {% assign variant_classes = 'inline-block' %}
+    {% assign variant_classes = 'inline-block rounded-sm' %}
 {% endcase %}
 
 {% case size %}

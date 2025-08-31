@@ -9,10 +9,16 @@
  */
 {
   "sections": {
+    "product": {
+      "type": "product",
+      "name": "Product",
+      "settings": {}
+    },
     "scents-overview": {
       "type": "scents-overview",
-      "name": "Scents Overview"
+      "name": "Scents Overview",
+      "settings": {}
     }
   },
-  "order": ["scents-overview"]
+  "order": ["product", "scents-overview"]
 }

@@ -33,22 +33,12 @@
       <div class='mt-12 flex justify-center'>
         <nav class='flex items-center space-x-2'>
           {% if paginate.previous %}
-            <a
-              href='{{ paginate.previous.url }}'
-              class='border-brand-neutral-300 text-brand-neutral-500 hover:bg-brand-neutral-50 hover:text-brand-neutral-700 rounded-md border px-3 py-2 text-sm transition-colors'
-            >
-              Previous
-            </a>
+            {% render 'link', text: 'Previous', url: paginate.previous.url %}
           {% endif %}
 
           {% for part in paginate.parts %}
             {% if part.is_link %}
-              <a
-                href='{{ part.url }}'
-                class='border-brand-neutral-300 text-brand-neutral-700 hover:bg-brand-neutral-50 hover:text-brand-neutral-900 rounded-md border px-3 py-2 text-sm transition-colors'
-              >
-                {{ part.title }}
-              </a>
+              {% render 'link', text: part.title, url: part.url %}
             {% else %}
               <span class='border-brand-neutral-300 bg-brand-neutral-100 text-brand-neutral-500 rounded-md border px-3 py-2 text-sm'>
                 {{ part.title }}
@@ -57,12 +47,7 @@
           {% endfor %}
 
           {% if paginate.next %}
-            <a
-              href='{{ paginate.next.url }}'
-              class='border-brand-neutral-300 text-brand-neutral-500 hover:bg-brand-neutral-50 hover:text-brand-neutral-700 rounded-md border px-3 py-2 text-sm transition-colors'
-            >
-              Next
-            </a>
+            {% render 'link', text: 'Next', url: paginate.next.url %}
           {% endif %}
         </nav>
       </div>
