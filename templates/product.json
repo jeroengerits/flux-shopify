@@ -14,7 +14,7 @@
       "name": "Breadcrumbs",
       "settings": {}
     },
-    "spacer": {
+    "spacer-001": {
       "type": "spacer",
       "name": "Spacer",
       "settings": {
@@ -26,11 +26,18 @@
       "name": "Product",
       "settings": {}
     },
+    "spacer-002": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "scents-overview": {
       "type": "scents-overview",
       "name": "Scents Overview",
       "settings": {}
     }
   },
-  "order": ["breadcrumbs", "spacer", "product-card-cta", "scents-overview"]
+  "order": ["breadcrumbs", "spacer-001", "product-card-cta", "spacer-002", "scents-overview"]
 }

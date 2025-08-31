@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {}
+    },
+    "spacer": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
+    "all_products": {
+      "type": "collection",
+      "name": "All Products",
+      "settings": {
+        "selected_collection": "all",
+        "products_per_page": 24,
+        "show_collection_title": false
+      }
+    }
+  },
+  "order": ["breadcrumbs", "spacer", "all_products"]
+}
