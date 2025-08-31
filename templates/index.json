@@ -16,7 +16,7 @@
     },
     "featured_collection": {
       "type": "collection",
-      "name": "Collection",
+      "name": "Featured Collection",
       "settings": {
         "selected_collection": "featured",
         "products_per_page": 6,
