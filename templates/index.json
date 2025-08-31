@@ -1,10 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "name": "Hero",
       "settings": {}
+    },
+    "collection_mX4Kew": {
+      "type": "collection",
+      "name": "Collection",
+      "settings": {
+        "selected_collection": "featured",
+        "products_per_page": 6,
+        "show_collection_title": false
+      }
     }
   },
-  "order": ["hero"]
+  "order": [
+    "hero",
+    "collection_mX4Kew"
+  ]
 }
