@@ -1,24 +1,29 @@
-<header role="banner" class="fixed left-0 right-0 top-0 z-50 h-[80px] bg-white/75 px-6 pb-6 pt-5 backdrop-blur-3xl border-b border-brand-neutral-200/50">
-  <div class="flex items-center justify-between h-full">
+<header
+  role='banner'
+  class='border-brand-neutral-200/50 fixed left-0 right-0 top-0 z-50 h-[80px] border-b bg-white/75 px-6 pb-6 pt-5 backdrop-blur-3xl'
+>
+  <div class='flex h-full items-center justify-between'>
     <!-- Logo/Brand -->
-    <div class="flex items-center">
-      <div class="text-3xl font-medium lowercase">
+    <div class='flex items-center'>
+      <div class='text-3xl font-medium lowercase'>
         {% render 'link', text: shop.name, url: routes.root_url %}
       </div>
     </div>
-    
+
     <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation" class="flex items-center gap-6">
+    <nav role='navigation' aria-label='Main navigation' class='flex items-center gap-6'>
       <!-- Main Menu -->
       {% if linklists['main-menu'].links.size > 0 %}
-        <ul class="hidden md:flex items-center gap-6 text-sm" role="menubar">
+        <ul class='hidden items-center gap-6 text-sm md:flex' role='menubar'>
           {% for link in linklists['main-menu'].links %}
-            <li role="none">
-              <a 
-                href="{{ link.url }}" 
-                class="text-brand-neutral-700 hover:text-brand-neutral-900 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
-                role="menuitem"
-                {% if link.current %}aria-current="page"{% endif %}
+            <li role='none'>
+              <a
+                href='{{ link.url }}'
+                class='text-brand-neutral-700 hover:text-brand-neutral-900 focus-visible:ring-brand-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+                role='menuitem'
+                {% if link.current %}
+                  aria-current='page'
+                {% endif %}
               >
                 {{ link.title }}
               </a>
@@ -26,47 +31,52 @@
           {% endfor %}
         </ul>
       {% endif %}
-      
+
       <!-- Cart -->
-      <div class="flex items-center">
+      <div class='flex items-center'>
         <a
-          href="{{ routes.cart_url }}"
-          class="text-brand-neutral-700 hover:text-brand-neutral-900 flex items-center gap-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
-          aria-label="Shopping cart ({{ cart.item_count }} items)"
+          href='{{ routes.cart_url }}'
+          class='text-brand-neutral-700 hover:text-brand-neutral-900 focus-visible:ring-brand-accent flex items-center gap-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+          aria-label='Shopping cart ({{ cart.item_count }} items)'
         >
-          <span class="hidden sm:inline">Your Cart</span>
+          <span class='hidden sm:inline'>Your Cart</span>
           {% render 'cart-icon', amount: cart.item_count, show_label: false %}
           {% if cart.item_count > 0 %}
-            <span class="sr-only">({{ cart.item_count }} items)</span>
+            <span class='sr-only'>({{ cart.item_count }} items)</span>
           {% endif %}
         </a>
       </div>
-      
+
       <!-- Mobile Menu Button -->
       <button
-        type="button"
-        class="md:hidden p-2 text-brand-neutral-700 hover:text-brand-neutral-900 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
-        aria-label="Toggle mobile menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
+        type='button'
+        class='text-brand-neutral-700 hover:text-brand-neutral-900 focus-visible:ring-brand-accent p-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 md:hidden'
+        aria-label='Toggle mobile menu'
+        aria-expanded='false'
+        aria-controls='mobile-menu'
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class='h-6 w-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </nav>
   </div>
-  
+
   <!-- Mobile Menu (Hidden by default) -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-t border-brand-neutral-200 shadow-lg">
+  <div
+    id='mobile-menu'
+    class='border-brand-neutral-200 absolute left-0 right-0 top-full hidden border-t bg-white shadow-lg md:hidden'
+  >
     {% if linklists['main-menu'].links.size > 0 %}
-      <ul class="py-4 space-y-2">
+      <ul class='space-y-2 py-4'>
         {% for link in linklists['main-menu'].links %}
           <li>
-            <a 
-              href="{{ link.url }}" 
-              class="block px-6 py-2 text-brand-neutral-700 hover:text-brand-neutral-900 hover:bg-brand-neutral-50 transition-colors duration-200"
-              {% if link.current %}aria-current="page"{% endif %}
+            <a
+              href='{{ link.url }}'
+              class='text-brand-neutral-700 hover:text-brand-neutral-900 hover:bg-brand-neutral-50 block px-6 py-2 transition-colors duration-200'
+              {% if link.current %}
+                aria-current='page'
+              {% endif %}
             >
               {{ link.title }}
             </a>

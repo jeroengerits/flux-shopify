@@ -1,8 +1,8 @@
 {% comment %}
   Button snippet with multiple variants and accessibility features
-  
+
   Usage: {% render 'button', label: 'Click me', variant: 'primary', size: 'md', full_width: false, disabled: false %}
-  
+
   Parameters:
   - label: Button text (required)
   - variant: primary, secondary, outline, ghost (default: primary)
@@ -78,14 +78,14 @@
 
 {% if href != '' %}
   <a
-    href="{{ href }}"
+    href='{{ href }}'
     {% if target %}
-      target="{{ target }}"
-      rel="noopener noreferrer"
+      target='{{ target }}'
+      rel='noopener noreferrer'
     {% endif %}
-    class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}"
+    class='inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
     {% if aria_label %}
-      aria-label="{{ aria_label }}"
+      aria-label='{{ aria_label }}'
     {% endif %}
     {% if data_attributes %}
       {{ data_attributes }}
