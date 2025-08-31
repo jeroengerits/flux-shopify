@@ -6,12 +6,11 @@
 
 <div class='px-6'>
   <form action='/cart' method='post' novalidate>
-    {% render 'section-title', text: 'Your Shopping Cart' %}
     {% if cart.item_count > 0 %}
       <div class='grid grid-cols-1 gap-8 lg:grid-cols-3'>
         <!-- Left Column: Shopping Cart -->
         <div class='lg:col-span-2'>
-          <div class='overflow-hidden rounded-lg  border border-neutral-200 bg-white'>
+          <div class='border-brand-neutral-200 overflow-hidden  rounded-lg border bg-white'>
             <!-- Table Header -->
             {% comment %}
                             <div class='hidden md:grid md:grid-cols-12 gap-4 px-6 py-4 bg-neutral-50 border-b border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wide'>
@@ -23,7 +22,7 @@
             {% endcomment %}
 
             <!-- Cart Items -->
-            <div class='divide-y divide-neutral-200'>
+            <div class='divide-brand-neutral-200 divide-y'>
               {% for item in cart.items %}
                 <div class='p-4 md:p-6' data-item-key='{{ item.key }}'>
                   <!-- Mobile Layout -->
@@ -42,26 +41,19 @@
                               class='h-24 w-24 rounded-lg object-cover'
                             >
                           {% else %}
-                            {{ 'product-1' | placeholder_svg_tag: 'w-24 h-24 text-neutral-300 rounded-lg' }}
+                            {{ 'product-1' | placeholder_svg_tag: 'w-24 h-24 text-brand-neutral-300 rounded-lg' }}
                           {% endif %}
                         </a>
                       </div>
 
                       <div class='min-w-0 flex-1'>
-                        <h3 class='text-lg font-semibold text-neutral-900'>
-                          <a href='{{ item.url }}' class='transition-colors hover:text-neutral-700'>
-                            {{ item.product.title }}
-                          </a>
-                        </h3>
-
-                        <div class='text-base font-normal text-neutral-500'>
-                          {{ item.product.type }}
-                        </div>
+                        {% render 'item-title', text: item.product.title %}
+                        {% render 'item-subtitle', text: item.product.type %}
 
                         {% if item.product.has_only_default_variant == false %}
                           <div class='mt-1'>
                             {% for option in item.options_with_values %}
-                              <span class='inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800'>
+                              <span class='bg-brand-neutral-200 text-brand-neutral-800 inline-block rounded px-2 py-1 text-xs font-medium'>
                                 {{ option.value }}
                               </span>
                             {% endfor %}
@@ -73,7 +65,7 @@
                     <!-- Price, Quantity, and Total -->
                     <div class='grid grid-cols-3 gap-4 text-center'>
                       <div>
-                        <span class='text-sm font-medium text-neutral-500'>Price</span>
+                        <span class='text-brand-neutral-500 text-sm font-medium'>Price</span>
                         {% render 'item-price',
                           amount: item.final_price,
                           size: 'lg',
@@ -89,11 +81,11 @@
                               label: '−',
                               variant: 'outline',
                               size: 'sm',
-                              class: 'flex h-8 w-8 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950',
+                              class: 'flex h-8 w-8 cursor-pointer items-center justify-center border-r border-brand-neutral-300 bg-white text-lg font-medium text-brand-neutral-700 transition-all hover:text-brand-neutral-950',
                               data_action: 'decrease',
                               data_item_key: item.key
                             %}
-                            <span class='w-8 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
+                            <span class='text-brand-neutral-900 w-8 bg-white py-3 text-center text-lg font-semibold'>
                               {{ item.quantity }}
                             </span>
                             <input
@@ -107,7 +99,7 @@
                               label: '+',
                               variant: 'outline',
                               size: 'sm',
-                              class: 'flex h-8 w-8 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950',
+                              class: 'flex h-8 w-8 cursor-pointer items-center justify-center border-l border-brand-neutral-300 bg-white text-lg font-medium text-brand-neutral-700 transition-all hover:text-brand-neutral-950',
                               data_action: 'increase',
                               data_item_key: item.key
                             %}
@@ -115,7 +107,7 @@
                         </div>
                       </div>
                       <div>
-                        <span class='text-sm font-medium text-neutral-500'>Total</span>
+                        <span class='text-brand-neutral-500 text-sm font-medium'>Total</span>
                         {% render 'item-price',
                           amount: item.final_line_price,
                           size: 'lg',
@@ -143,26 +135,19 @@
                                 class='h-24 w-24 rounded-lg object-cover'
                               >
                             {% else %}
-                              {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 text-neutral-300 rounded-lg' }}
+                              {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 text-brand-neutral-300 rounded-lg' }}
                             {% endif %}
                           </a>
                         </div>
 
                         <div class='min-w-0 flex-1'>
-                          <h3 class='text-lg font-semibold text-neutral-900'>
-                            <a href='{{ item.url }}' class='transition-colors hover:text-neutral-700'>
-                              {{ item.product.title }}
-                            </a>
-                          </h3>
-
-                          <div class='text-base font-normal text-neutral-500'>
-                            {{ item.product.type }}
-                          </div>
+                          {% render 'item-title', text: item.product.title %}
+                          {% render 'item-subtitle', text: item.product.type %}
 
                           {% if item.product.has_only_default_variant == false %}
                             <div class='mt-1'>
                               {% for option in item.options_with_values %}
-                                <span class='inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800'>
+                                <span class='bg-brand-neutral-200 text-brand-neutral-800 inline-block rounded px-2 py-1 text-xs font-medium'>
                                   {{ option.value }}
                                 </span>
                               {% endfor %}
@@ -180,11 +165,11 @@
                           label: '−',
                           variant: 'outline',
                           size: 'sm',
-                          class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950',
+                          class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-r border-brand-neutral-300 bg-white text-lg font-medium text-brand-neutral-700 transition-all hover:text-brand-neutral-950',
                           data_action: 'decrease',
                           data_item_key: item.key
                         %}
-                        <span class='w-12 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
+                        <span class='text-brand-neutral-900 w-12 bg-white py-3 text-center text-lg font-semibold'>
                           {{ item.quantity }}
                         </span>
                         {% render 'button',
@@ -192,7 +177,7 @@
                           label: '+',
                           variant: 'outline',
                           size: 'sm',
-                          class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950',
+                          class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-l border-brand-neutral-300 bg-white text-lg font-medium text-brand-neutral-700 transition-all hover:text-brand-neutral-950',
                           data_action: 'increase',
                           data_item_key: item.key
                         %}
@@ -227,10 +212,10 @@
 
         <!-- Right Column: Order Summary -->
         <div class='lg:col-span-1'>
-          <div class='sticky top-6  rounded-lg border border-neutral-200 bg-white p-6'>
+          <div class='border-brand-neutral-200 sticky  top-6 rounded-lg border bg-white p-6'>
             <!-- Total Cost -->
             <div class='flex items-center justify-between'>
-              <span class='text-lg font-medium  text-neutral-500'
+              <span class='text-brand-neutral-500 text-lg  font-medium'
                 >Total Cost <small class='font-normal'>Including Taxes</small>
               </span>
               {% render 'item-price', amount: cart.total_price, size: '2xl', weight: 'bold', color: 'primary' %}
@@ -245,18 +230,18 @@
                 size: 'lg',
                 full_width: true,
                 name: 'checkout',
-                class: 'bg-neutral-700 hover:bg-neutral-800'
+                class: 'bg-brand-primary hover:bg-brand-neutral-800'
               %}
             </div>
 
             <!-- Continue Shopping Link -->
             <div class='mt-4 text-center'>
-              <a
-                href='/collections/stock'
-                class='inline-flex items-center font-medium text-neutral-600 transition-colors hover:text-neutral-800'
-              >
-                Continue Shopping
-              </a>
+              {% render 'button',
+                label: 'Continue Shopping',
+                variant: 'ghost',
+                size: 'sm',
+                href: '/collections/stock'
+              %}
             </div>
           </div>
         </div>
@@ -265,21 +250,17 @@
       <!-- Empty Cart State -->
       <div class='py-16 text-center lg:py-24'>
         <div class='mx-auto max-w-md'>
-          <div class='mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-neutral-100'>
-            <svg class='h-12 w-12 text-neutral-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <div class='bg-brand-neutral-100 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full'>
+            <svg class='text-brand-neutral-400 h-12 w-12' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
               <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'></path>
             </svg>
           </div>
-          <h2 class='mb-4 text-2xl font-bold text-neutral-900 sm:text-3xl'>Your cart is empty</h2>
-          <p class='mb-8 text-lg text-neutral-600'>
-            Looks like you haven't added anything to your cart yet. Start shopping to fill it up!
-          </p>
+          {% render 'item-title', text: 'Your cart is empty' %}
+          {% render 'paragraph', text: 'Looks like you haven\'t added anything to your cart yet. Start shopping to fill it up!' %}
           {% render 'button',
-            type: 'button',
             label: 'Start Shopping',
             variant: 'primary',
             size: 'lg',
-            class: 'bg-neutral-800 hover:bg-neutral-900',
             icon_left: 'M12 6v6m0 0v6m0-6h6m-6 0H6',
             href: '/collections/all'
           %}

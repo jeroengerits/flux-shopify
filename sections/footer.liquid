@@ -1,4 +1,4 @@
-<footer role='contentinfo' class=' mt-16'>
+<footer role='contentinfo' class=' mt-16    '>
   <div class='px-9 py-12'>
     <div class='grid grid-cols-1  md:grid-cols-3'>
       <!-- Company Info -->
@@ -16,7 +16,7 @@
           <li>
             <a
               href='/pages/privacy'
-              class='text-neutral-600 transition-colors hover:text-neutral-900'
+              class='text-brand-neutral-600 hover:text-brand-neutral-900 transition-colors'
             >
               Privacy Policy
             </a>
@@ -24,7 +24,7 @@
           <li>
             <a
               href='/pages/terms'
-              class='text-neutral-600 transition-colors hover:text-neutral-900'
+              class='text-brand-neutral-600 hover:text-brand-neutral-900 transition-colors'
             >
               Terms of Service
             </a>
@@ -32,7 +32,7 @@
           <li>
             <a
               href='/pages/contact'
-              class='text-neutral-600 transition-colors hover:text-neutral-900'
+              class='text-brand-neutral-600 hover:text-brand-neutral-900 transition-colors'
             >
               Contact Us
             </a>
@@ -43,7 +43,7 @@
 
     <!-- Bottom Section -->
     <div class='flex flex-col items-center justify-between md:flex-row'>
-      <div class='mb-4 text-sm text-neutral-500 md:mb-0'>
+      <div class='text-brand-neutral-500 mb-4 text-sm md:mb-0'>
         <p>
           &copy; {{ 'now' | date: '%Y' }}
           {{ shop.name }}. All rights reserved.
@@ -55,7 +55,7 @@
         {% if settings.social_facebook_link != blank %}
           <a
             href='{{ settings.social_facebook_link }}'
-            class='text-neutral-400 transition-colors hover:text-neutral-600'
+            class='text-brand-neutral-400 hover:text-brand-neutral-600 transition-colors'
             aria-label='Facebook'
           >
             <svg class='h-5 w-5' fill='currentColor' viewBox='0 0 24 24'>
@@ -67,7 +67,7 @@
         {% if settings.social_instagram_link != blank %}
           <a
             href='{{ settings.social_instagram_link }}'
-            class='text-neutral-400 transition-colors hover:text-neutral-600'
+            class='text-brand-neutral-400 hover:text-brand-neutral-600 transition-colors'
             aria-label='Instagram'
           >
             <svg class='h-5 w-5' fill='currentColor' viewBox='0 0 24 24'>
@@ -79,7 +79,7 @@
         {% if settings.social_twitter_link != blank %}
           <a
             href='{{ settings.social_twitter_link }}'
-            class='text-neutral-400 transition-colors hover:text-neutral-600'
+            class='text-brand-neutral-400 hover:text-brand-neutral-600 transition-colors'
             aria-label='Twitter'
           >
             <svg class='h-5 w-5' fill='currentColor' viewBox='0 0 24 24'>

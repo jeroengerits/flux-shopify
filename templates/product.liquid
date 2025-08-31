@@ -9,15 +9,15 @@
     >
   </div>
   <div class='flex w-full flex-col gap-2 md:w-1/2 md:pr-6 md:pt-6'>
-    <h1 class='whitespace-nowrap text-xl  font-medium text-neutral-800'>
+    <h1 class='text-brand-neutral-800 whitespace-nowrap  text-xl font-medium'>
       {{ product.title }}
     </h1>
-    <div class='mb-2 text-base text-neutral-500'>
+    <div class='text-brand-neutral-500 mb-2 text-base'>
       <p>
         {{ product.type }}
       </p>
     </div>
-    <div class='whitespace-nowrap  text-3xl  font-bold text-neutral-800'>
+    <div class='text-brand-neutral-800  whitespace-nowrap  text-3xl font-bold'>
       {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
     </div>
     <div class='mb-6 mt-4'>

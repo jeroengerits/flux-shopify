@@ -46,19 +46,19 @@
 
 {% case color %}
   {% when 'neutral' %}
-    {% assign color_classes = 'text-neutral-700' %}
+    {% assign color_classes = 'text-brand-neutral-700' %}
   {% when 'muted' %}
-    {% assign color_classes = 'text-neutral-500' %}
+    {% assign color_classes = 'text-brand-neutral-500' %}
   {% when 'primary' %}
-    {% assign color_classes = 'text-neutral-900' %}
+    {% assign color_classes = 'text-brand-neutral-900' %}
   {% when 'success' %}
-    {% assign color_classes = 'text-green-600' %}
+    {% assign color_classes = 'text-brand-success' %}
   {% when 'warning' %}
-    {% assign color_classes = 'text-yellow-600' %}
+    {% assign color_classes = 'text-brand-warning' %}
   {% when 'danger' %}
-    {% assign color_classes = 'text-red-600' %}
+    {% assign color_classes = 'text-brand-error' %}
   {% else %}
-    {% assign color_classes = 'text-neutral-700' %}
+    {% assign color_classes = 'text-brand-neutral-700' %}
 {% endcase %}
 
 <div class='text-pretty {{ size_classes }} {{ weight_classes }} {{ color_classes }} {{ class }}'>

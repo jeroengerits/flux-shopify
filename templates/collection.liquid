@@ -8,11 +8,11 @@
   <div class=''>
     <div class='px-6 pb-6'>
       <div class=''>
-        <h1 class='text-md mb-2 font-normal text-neutral-800'>{{ collection.title }}</h1>
+        <h1 class='text-md text-brand-neutral-800 mb-2 font-normal'>{{ collection.title }}</h1>
         {% if collection.description != blank %}
-          <p class='mx-auto max-w-3xl text-sm text-neutral-600'>{{ collection.description }}</p>
+          <p class='text-brand-neutral-600 mx-auto max-w-3xl text-sm'>{{ collection.description }}</p>
         {% endif %}
-        <p class='mt-2 text-xs text-neutral-500'>
+        <p class='text-brand-neutral-500 mt-2 text-xs'>
           {{ collection.products.size }} product{% if collection.products.size != 1 %}s{% endif %}
         </p>
       </div>
@@ -35,7 +35,7 @@
           {% if paginate.previous %}
             <a
               href='{{ paginate.previous.url }}'
-              class='rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-700'
+              class='border-brand-neutral-300 text-brand-neutral-500 hover:bg-brand-neutral-50 hover:text-brand-neutral-700 rounded-md border px-3 py-2 text-sm transition-colors'
             >
               Previous
             </a>
@@ -45,12 +45,12 @@
             {% if part.is_link %}
               <a
                 href='{{ part.url }}'
-                class='rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900'
+                class='border-brand-neutral-300 text-brand-neutral-700 hover:bg-brand-neutral-50 hover:text-brand-neutral-900 rounded-md border px-3 py-2 text-sm transition-colors'
               >
                 {{ part.title }}
               </a>
             {% else %}
-              <span class='rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-500'>
+              <span class='border-brand-neutral-300 bg-brand-neutral-100 text-brand-neutral-500 rounded-md border px-3 py-2 text-sm'>
                 {{ part.title }}
               </span>
             {% endif %}
@@ -59,7 +59,7 @@
           {% if paginate.next %}
             <a
               href='{{ paginate.next.url }}'
-              class='rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-700'
+              class='border-brand-neutral-300 text-brand-neutral-500 hover:bg-brand-neutral-50 hover:text-brand-neutral-700 rounded-md border px-3 py-2 text-sm transition-colors'
             >
               Next
             </a>

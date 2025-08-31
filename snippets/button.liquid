@@ -18,15 +18,15 @@
 
 {% case variant %}
   {% when 'primary' %}
-    {% assign variant_classes = 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-900' %}
+    {% assign variant_classes = 'bg-brand-primary text-white hover:bg-brand-neutral-800 focus:ring-brand-primary' %}
   {% when 'secondary' %}
-    {% assign variant_classes = 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus:ring-neutral-500' %}
+    {% assign variant_classes = 'bg-brand-neutral-100 text-brand-neutral-900 hover:bg-brand-neutral-200 focus:ring-brand-neutral-500' %}
   {% when 'outline' %}
-    {% assign variant_classes = 'border border-neutral-300 bg-transparent text-neutral-700 hover:bg-neutral-50 focus:ring-neutral-500' %}
+    {% assign variant_classes = 'border border-brand-neutral-300 bg-transparent text-brand-neutral-700 hover:bg-brand-neutral-50 focus:ring-brand-neutral-500' %}
   {% when 'ghost' %}
-    {% assign variant_classes = 'bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-500' %}
+    {% assign variant_classes = 'bg-transparent text-brand-neutral-700 hover:bg-brand-neutral-100 focus:ring-brand-neutral-500' %}
   {% else %}
-    {% assign variant_classes = 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-900' %}
+    {% assign variant_classes = 'bg-brand-primary text-white hover:bg-brand-neutral-800 focus:ring-brand-primary' %}
 {% endcase %}
 
 {% case size %}
