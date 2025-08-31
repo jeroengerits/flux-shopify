@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "spacer-001": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "name": "Breadcrumbs",
@@ -20,5 +27,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumbs", "page"]
+  "order": ["spacer-001", "breadcrumbs", "page"]
 }

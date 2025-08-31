@@ -19,10 +19,7 @@
       assign current_title = product.title
       assign current_url = product.url
       assign breadcrumb_items = 'product'
-      if product.collections.size > 0
-        assign first_collection = product.collections.first
-        assign breadcrumb_links = first_collection
-      endif
+
     when 'collection'
       assign current_title = collection.title
       assign current_url = collection.url
@@ -51,7 +48,7 @@
   endcase
 -%}
 
-<div class='px-6 py-4'>
+<div class='px-6'>
   <nav class='text-brand-neutral-600 flex items-center gap-2 text-sm' aria-label='Breadcrumb'>
     {% if section.settings.show_home %}
       {% render 'link', text: 'Home', url: routes.root_url %}

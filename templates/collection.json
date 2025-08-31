@@ -1,11 +1,18 @@
 {
   "sections": {
+    "spacer-001": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "name": "Breadcrumbs",
       "settings": {}
     },
-    "spacer": {
+    "spacer-002": {
       "type": "spacer",
       "name": "Spacer",
       "settings": {
@@ -22,5 +29,5 @@
       }
     }
   },
-  "order": ["breadcrumbs", "spacer", "all_products"]
+  "order": ["spacer-001", "breadcrumbs", "spacer-002", "all_products"]
 }

@@ -21,7 +21,7 @@
   <a
     href='{{ product.url }}'
     class='border-brand-neutral-200 hover:border-brand-neutral-300 focus-visible:ring-brand-accent block overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
-    aria-labelledby='product-title-{{ product.id }}'
+    aria-label='{{ product.title | escape }}'
   >
     <!-- Product Image Container -->
     <div class='bg-brand-neutral-50 relative aspect-square overflow-hidden'>
@@ -55,15 +55,6 @@
           </svg>
         </div>
       {% endif %}
-
-      <!-- Quick View Button (Optional) -->
-      {% if product.available %}
-        <div class='absolute bottom-2 right-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-          <span class='text-brand-neutral-700 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow-sm backdrop-blur-sm'>
-            Quick View
-          </span>
-        </div>
-      {% endif %}
     </div>
 
     <!-- Product Information -->
@@ -71,17 +62,13 @@
       <div class='space-y-2'>
         <!-- Title and Type Row -->
         <div class='flex flex-col gap-1'>
-          <h3
-            id='product-title-{{ product.id }}'
-            class='text-brand-neutral-900 group-hover:text-brand-accent line-clamp-2 font-medium transition-colors duration-200'
-          >
-            {{ product.title }}
-          </h3>
+          {% render 'item-title',
+            text: product.title,
+            class: 'group-hover:text-brand-accent line-clamp-2 transition-colors duration-200'
+          %}
 
           {% if show_type and product.type %}
-            <p class='text-brand-neutral-500 text-sm'>
-              {{ product.type }}
-            </p>
+            {% render 'item-subtitle', text: product.type %}
           {% endif %}
         </div>
 
@@ -90,24 +77,21 @@
           <div class='flex items-center justify-between'>
             <div class='flex items-center gap-2'>
               {% if product.compare_at_price > product.price %}
-                <span class='text-brand-neutral-500 text-sm line-through'>
-                  {{ product.compare_at_price | money }}
-                </span>
-                <span class='text-brand-success text-lg font-semibold'>
-                  {{ product.price | money }}
-                </span>
+                {% render 'item-price',
+                  amount: product.compare_at_price,
+                  size: 'sm',
+                  color: 'muted',
+                  class: 'line-through'
+                %}
+                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'success' %}
               {% else %}
-                <span class='text-brand-neutral-900 text-lg font-semibold'>
-                  {{ product.price | money }}
-                </span>
+                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'primary' %}
               {% endif %}
             </div>
 
             <!-- Availability Badge -->
             {% unless product.available %}
-              <span class='bg-brand-error/10 text-brand-error inline-flex items-center rounded-full px-2 py-1 text-xs font-medium'>
-                Out of Stock
-              </span>
+              {% render 'tag', text: 'Out of Stock', variant: 'pill', size: 'sm', color: 'error' %}
             {% endunless %}
           </div>
         {% endif %}

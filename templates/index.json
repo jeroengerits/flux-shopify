@@ -9,12 +9,19 @@
  */
 {
   "sections": {
+    "spacer-001": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "hero": {
       "type": "hero",
       "name": "Hero",
       "settings": {}
     },
-    "spacer": {
+    "spacer-002": {
       "type": "spacer",
       "name": "Spacer",
       "settings": {
@@ -31,5 +38,5 @@
       }
     }
   },
-  "order": ["hero", "spacer", "featured_collection"]
+  "order": ["spacer-001", "hero", "spacer-002", "featured_collection"]
 }

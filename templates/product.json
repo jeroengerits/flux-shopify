@@ -9,12 +9,19 @@
  */
 {
   "sections": {
+    "spacer-001": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "name": "Breadcrumbs",
       "settings": {}
     },
-    "spacer-001": {
+    "spacer-002": {
       "type": "spacer",
       "name": "Spacer",
       "settings": {
@@ -26,7 +33,7 @@
       "name": "Product",
       "settings": {}
     },
-    "spacer-002": {
+    "spacer-003": {
       "type": "spacer",
       "name": "Spacer",
       "settings": {
@@ -39,5 +46,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumbs", "spacer-001", "product-card-cta", "spacer-002", "scents-overview"]
+  "order": ["spacer-001", "breadcrumbs", "spacer-002", "product-card-cta", "spacer-003", "scents-overview"]
 }
