@@ -1,9 +1,9 @@
 <footer role="contentinfo" class=" mt-16 border-t border-neutral-200">
   <div class="mx-auto max-w-7xl px-9 py-12">
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <div class="grid grid-cols-1  md:grid-cols-3">
       <!-- Company Info -->
       <div class="col-span-1 md:col-span-2">
-        <div class="mb-4 text-2xl font-medium">
+        <div class="mb-1 text-2xl font-medium">
           <a href="{{ routes.root_url }}" class="lowercase">
             {{ shop.name }}
           </a>
@@ -15,7 +15,7 @@
         <ul class="flex gap-4 space-y-2 text-sm">
           <li>
             <a
-              href="{{ routes.root_url }}/pages/privacy-policy"
+              href="/pages/privacy"
               class="text-neutral-600 transition-colors hover:text-neutral-900"
             >
               Privacy Policy
@@ -23,7 +23,7 @@
           </li>
           <li>
             <a
-              href="{{ routes.root_url }}/pages/terms-of-service"
+              href="/pages/terms"
               class="text-neutral-600 transition-colors hover:text-neutral-900"
             >
               Terms of Service
@@ -31,7 +31,7 @@
           </li>
           <li>
             <a
-              href="{{ routes.root_url }}/pages/contact"
+              href="/pages/contact"
               class="text-neutral-600 transition-colors hover:text-neutral-900"
             >
               Contact Us
