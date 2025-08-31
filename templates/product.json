@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "name": "Breadcrumb",
+      "settings": {
+        "show_breadcrumbs": true,
+        "breadcrumb_style": "minimal"
+      }
+    },
     "product": {
       "type": "product",
       "name": "Product",
@@ -20,5 +28,5 @@
       "settings": {}
     }
   },
-  "order": ["product", "scents-overview"]
+  "order": ["breadcrumb", "product", "scents-overview"]
 }

@@ -1,0 +1,124 @@
+{% comment %}
+  Dynamic Breadcrumb Section
+  Automatically generates breadcrumbs based on the current page context
+  Supports: pages, products, collections, blogs, articles, and search results
+{% endcomment %}
+
+{%- liquid
+  assign breadcrumb_items = ''
+  assign current_title = ''
+  assign current_url = ''
+
+  case template
+    when 'page'
+      assign current_title = page.title
+      assign current_url = page.url
+      assign breadcrumb_items = 'page'
+    when 'product'
+      assign current_title = product.title
+      assign current_url = product.url
+      assign breadcrumb_items = 'product'
+    when 'collection'
+      assign current_title = collection.title
+      assign current_url = collection.url
+      assign breadcrumb_items = 'collection'
+    when 'blog'
+      assign current_title = blog.title
+      assign current_url = blog.url
+      assign breadcrumb_items = 'blog'
+    when 'article'
+      assign current_title = article.title
+      assign current_url = article.url
+      assign breadcrumb_items = 'article'
+    when 'search'
+      assign current_title = 'Search Results'
+      assign current_url = routes.search_url
+      assign breadcrumb_items = 'search'
+    when '404'
+      assign current_title = 'Page Not Found'
+      assign current_url = ''
+      assign breadcrumb_items = '404'
+    else
+      assign current_title = page_title
+      assign current_url = request.path
+      assign breadcrumb_items = 'default'
+  endcase
+-%}
+
+<div class='breadcrumb-section pb-6'>
+  <div class='px-6'>
+    <nav class='flex items-center gap-2 text-sm' aria-label='Breadcrumb'>
+      {%- comment -%} Home link {%- endcomment -%}
+      {% render 'link', text: 'Home', url: routes.root_url %}
+
+      {%- comment -%} Breadcrumb separator {%- endcomment -%}
+      <svg
+        class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
+        aria-hidden='true'
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 6 10'
+      >
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
+      </svg>
+
+      {%- comment -%} Dynamic breadcrumb items based on template {%- endcomment -%}
+      {%- case breadcrumb_items -%}
+        {%- when 'product' -%}
+          {%- if product.collections.size > 0 -%}
+            {%- assign primary_collection = product.collections.first -%}
+            {% render 'link', text: primary_collection.title, url: primary_collection.url %}
+            <svg
+              class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
+              aria-hidden='true'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 6 10'
+            >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
+            </svg>
+          {%- endif -%}
+
+        {%- when 'article' -%}
+          {% render 'link', text: blog.title, url: blog.url %}
+          <svg
+            class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
+            aria-hidden='true'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 6 10'
+          >
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
+          </svg>
+      {%- endcase -%}
+
+      {%- comment -%} Current page title {%- endcomment -%}
+      <span class='text-brand-neutral-900 font-medium' aria-current='page'>
+        {{ current_title }}
+      </span>
+    </nav>
+  </div>
+</div>
+
+{% comment %}
+  Schema for section settings
+{% endcomment %}
+{% schema %}
+{
+  "name": "Breadcrumb",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumb",
+      "category": "Navigation"
+    }
+  ]
+}
+{% endschema %}

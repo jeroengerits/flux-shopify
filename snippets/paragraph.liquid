@@ -1,5 +1,5 @@
-<div class='text-brand-neutral-600 mb-2 text-pretty text-base leading-relaxed'>
+<div class='text-brand-neutral-500 mb-2 text-pretty text-base leading-relaxed'>
   <p>
-    {{ text }}
+    {{ text | default: 'This is the paragraph text.' }}
   </p>
 </div>
