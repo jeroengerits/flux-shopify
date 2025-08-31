@@ -1,9 +1,20 @@
 {% comment %}
-  Button snippet with multiple variants
+  Button snippet with multiple variants and accessibility features
+  
   Usage: {% render 'button', label: 'Click me', variant: 'primary', size: 'md', full_width: false, disabled: false %}
-
-  Variants: primary, secondary, outline, ghost
-  Sizes: xs, sm, md, lg, xl, 2xl
+  
+  Parameters:
+  - label: Button text (required)
+  - variant: primary, secondary, outline, ghost (default: primary)
+  - size: xs, sm, md, lg, xl, 2xl (default: md)
+  - full_width: Whether button should be full width (default: false)
+  - disabled: Whether button is disabled (default: false)
+  - type: button, submit, reset (default: button)
+  - href: URL for link buttons (optional)
+  - target: Target for link buttons (optional)
+  - class: Additional CSS classes (optional)
+  - aria_label: Custom aria-label (optional)
+  - data_attributes: Additional data attributes (optional)
 {% endcomment %}
 
 {% assign variant = variant | default: 'primary' %}
@@ -15,6 +26,8 @@
 {% assign href = href | default: '' %}
 {% assign target = target | default: '' %}
 {% assign name = name | default: '' %}
+{% assign aria_label = aria_label | default: '' %}
+{% assign data_attributes = data_attributes | default: '' %}
 
 {% case variant %}
   {% when 'primary' %}
@@ -65,19 +78,17 @@
 
 {% if href != '' %}
   <a
-    href='{{ href }}'
+    href="{{ href }}"
     {% if target %}
-      target='{{ target }}'
+      target="{{ target }}"
+      rel="noopener noreferrer"
     {% endif %}
-    class='leading-0 inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
-    {% if data_action %}
-      data-action='{{ data_action }}'
+    class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}"
+    {% if aria_label %}
+      aria-label="{{ aria_label }}"
     {% endif %}
-    {% if data_item_key %}
-      data-item-key='{{ data_item_key }}'
-    {% endif %}
-    {% if onclick %}
-      onclick='{{ onclick }}'
+    {% if data_attributes %}
+      {{ data_attributes }}
     {% endif %}
   >
 {% else %}

@@ -1,36 +1,103 @@
-<header role='banner' class='fixed left-0 right-0 top-0 z-50 h-[80px] bg-white/75 px-6 pb-6 pt-5 backdrop-blur-3xl'>
-  <div class='flex items-center justify-between'>
-    <div class=' flex items-center justify-between'>
-      <div class='text-3xl font-medium lowercase'>
+<header role="banner" class="fixed left-0 right-0 top-0 z-50 h-[80px] bg-white/75 px-6 pb-6 pt-5 backdrop-blur-3xl border-b border-brand-neutral-200/50">
+  <div class="flex items-center justify-between h-full">
+    <!-- Logo/Brand -->
+    <div class="flex items-center">
+      <div class="text-3xl font-medium lowercase">
         {% render 'link', text: shop.name, url: routes.root_url %}
       </div>
     </div>
-    <div role='navigation' class='menu flex items-center justify-between gap-4'>
-      <ul class='mr-4 flex items-center justify-between gap-4 text-sm'>
+    
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" class="flex items-center gap-6">
+      <!-- Main Menu -->
+      {% if linklists['main-menu'].links.size > 0 %}
+        <ul class="hidden md:flex items-center gap-6 text-sm" role="menubar">
+          {% for link in linklists['main-menu'].links %}
+            <li role="none">
+              <a 
+                href="{{ link.url }}" 
+                class="text-brand-neutral-700 hover:text-brand-neutral-900 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+                role="menuitem"
+                {% if link.current %}aria-current="page"{% endif %}
+              >
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      
+      <!-- Cart -->
+      <div class="flex items-center">
+        <a
+          href="{{ routes.cart_url }}"
+          class="text-brand-neutral-700 hover:text-brand-neutral-900 flex items-center gap-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+          aria-label="Shopping cart ({{ cart.item_count }} items)"
+        >
+          <span class="hidden sm:inline">Your Cart</span>
+          {% render 'cart-icon', amount: cart.item_count, show_label: false %}
+          {% if cart.item_count > 0 %}
+            <span class="sr-only">({{ cart.item_count }} items)</span>
+          {% endif %}
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="md:hidden p-2 text-brand-neutral-700 hover:text-brand-neutral-900 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+  
+  <!-- Mobile Menu (Hidden by default) -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-t border-brand-neutral-200 shadow-lg">
+    {% if linklists['main-menu'].links.size > 0 %}
+      <ul class="py-4 space-y-2">
         {% for link in linklists['main-menu'].links %}
           <li>
-            {% render 'link', text: link.title, url: link.url %}
+            <a 
+              href="{{ link.url }}" 
+              class="block px-6 py-2 text-brand-neutral-700 hover:text-brand-neutral-900 hover:bg-brand-neutral-50 transition-colors duration-200"
+              {% if link.current %}aria-current="page"{% endif %}
+            >
+              {{ link.title }}
+            </a>
           </li>
         {% endfor %}
       </ul>
-      <ul class='flex items-center justify-between gap-4 text-sm'>
-        <li>
-          <a
-            href='{{ routes.cart_url }}'
-            class='text-brand-neutral-700 hover:text-brand-neutral-900 flex items-center gap-2 transition-colors'
-          >
-            <span>Your Cart</span>
-            {% render 'cart-icon', amount: cart.item_count, show_label: false %}
-          </a>
-        </li>
-      </ul>
-    </div>
+    {% endif %}
   </div>
 </header>
 
 {% schema %}
 {
   "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search bar",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": false
+    }
+  ],
   "presets": [
     {
       "name": "Header",

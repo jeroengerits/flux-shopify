@@ -1,25 +1,108 @@
 {% liquid
   assign display_collection = section.settings.selected_collection | default: collection
   assign products_per_page = section.settings.products_per_page | default: 24
+  assign show_collection_title = section.settings.show_collection_title | default: false
+  assign show_collection_description = section.settings.show_collection_description | default: false
+  assign show_collection_image = section.settings.show_collection_image | default: false
+  assign grid_columns = section.settings.grid_columns | default: 'auto'
 %}
 
-<div class='px-6'>
-  {% if section.settings.show_collection_title %}
-    <h1 class='text-brand-neutral-500 pb-6 text-sm font-normal uppercase tracking-widest'>
-      {{ display_collection.title }}
-    </h1>
+<section class="px-6" aria-labelledby="collection-title-{{ display_collection.id }}">
+  {% if display_collection %}
+    <!-- Collection Header -->
+    {% if show_collection_title or show_collection_description or show_collection_image %}
+      <div class="mb-3">
+        {% if show_collection_image and display_collection.image %}
+          <div class="mb-6">
+            <img
+              src="{{ display_collection.image | image_url: width: 800, height: 400, crop: 'center' }}"
+              alt="{{ display_collection.image.alt | default: display_collection.title | escape }}"
+              loading="lazy"
+              width="800"
+              height="400"
+              class="mx-auto h-48 w-full max-w-4xl rounded-2xl object-cover"
+            >
+          </div>
+        {% endif %}
+        
+        {% if show_collection_title %}
+          <h1 
+            id="collection-title-{{ display_collection.id }}"
+            class="text-brand-neutral-500 pb-6 text-sm font-normal uppercase tracking-widest"
+          >
+            {{ display_collection.title }}
+          </h1>
+        {% endif %}
+        
+        {% if show_collection_description and display_collection.description != blank %}
+            <p class="text-lg text-brand-neutral-600">
+              {{ display_collection.description }}
+            </p>
+        {% endif %}
+        
+      </div>
+    {% endif %}
+    
+    <!-- Products Grid -->
+    {% if display_collection.products.size > 0 %}
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {% for product in display_collection.products limit: products_per_page %}
+          {% render 'product-card', 
+            product: product, 
+            image_width: 800, 
+            image_height: 400,
+            show_type: section.settings.show_product_type,
+            show_price: section.settings.show_product_price
+          %}
+        {% endfor %}
+      </div>
+      
+      <!-- Load More Button (if more products exist) -->
+      {% if display_collection.products.size > products_per_page %}
+        <div class="mt-12 text-center">
+          {% render 'button',
+            label: 'Load More Products',
+            variant: 'outline',
+            size: 'lg',
+            class: 'mx-auto',
+            data_attributes: 'data-action="load-more" data-collection-id="' | append: display_collection.id | append: '"'
+          %}
+        </div>
+      {% endif %}
+    {% else %}
+      <!-- Empty State -->
+      <div class="py-16 text-center">
+        <div class="mx-auto max-w-md">
+          <svg class="mx-auto h-12 w-12 text-brand-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+          </svg>
+          <h3 class="mt-4 text-lg font-medium text-brand-neutral-900">No products found</h3>
+          <p class="mt-2 text-brand-neutral-500">This collection doesn't have any products yet.</p>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <!-- Error State -->
+    <div class="py-16 text-center">
+      <div class="mx-auto max-w-md">
+        <svg class="mx-auto h-12 w-12 text-brand-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-brand-neutral-900">Collection not found</h3>
+        <p class="mt-2 text-brand-neutral-500">The selected collection could not be found or is empty.</p>
+      </div>
+    </div>
   {% endif %}
-  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-    {% for product in display_collection.products limit: products_per_page %}
-      {% render 'product-card', product: product, image_width: 800, image_height: 400 %}
-    {% endfor %}
-  </div>
-</div>
+</section>
 
 {% schema %}
 {
   "name": "Collection",
   "settings": [
+    {
+      "type": "header",
+      "content": "Collection Selection"
+    },
     {
       "type": "collection",
       "id": "selected_collection",
@@ -31,15 +114,43 @@
       "id": "products_per_page",
       "label": "Products per page",
       "min": 1,
-      "max": 24,
+      "max": 48,
       "step": 1,
-      "default": 6,
+      "default": 24,
       "info": "Number of products to show per page"
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
     },
     {
       "type": "checkbox",
       "id": "show_collection_title",
       "label": "Show collection title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "label": "Show collection description",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_type",
+      "label": "Show product type",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_price",
+      "label": "Show product price",
       "default": true
     }
   ],

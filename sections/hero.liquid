@@ -1,13 +1,124 @@
-<div class='px-6'>
-  <div class=' bg-brand-primary flex h-[400px] w-full items-center justify-center rounded-xl text-white'>
-    <h1>
-      {{ section.settings.title | default: 'HERO SECTION' }}
-    </h1>
+<section class="px-6 py-12">
+  <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-primary to-brand-neutral-800 text-white">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <pattern id="hero-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="1" fill="currentColor"/>
+          </pattern>
+        </defs>
+        <rect width="100" height="100" fill="url(#hero-pattern)"/>
+      </svg>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 flex min-h-[400px] items-center justify-center px-6 py-16 text-center">
+      <div class="max-w-4xl space-y-6">
+        {% if section.settings.subtitle %}
+          <p class="text-lg font-medium text-brand-neutral-200">
+            {{ section.settings.subtitle }}
+          </p>
+        {% endif %}
+        
+        <h1 class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+          {{ section.settings.title | default: 'Welcome to ' | append: shop.name }}
+        </h1>
+        
+        {% if section.settings.description %}
+          <p class="mx-auto max-w-2xl text-lg text-brand-neutral-200">
+            {{ section.settings.description }}
+          </p>
+        {% endif %}
+        
+        {% if section.settings.button_text and section.settings.button_url %}
+          <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            {% render 'button',
+              label: section.settings.button_text,
+              href: section.settings.button_url,
+              variant: 'primary',
+              size: 'lg',
+              class: 'bg-white text-brand-primary hover:bg-brand-neutral-100 focus:ring-white'
+            %}
+            
+            {% if section.settings.secondary_button_text and section.settings.secondary_button_url %}
+              {% render 'button',
+                label: section.settings.secondary_button_text,
+                href: section.settings.secondary_button_url,
+                variant: 'outline',
+                size: 'lg',
+                class: 'border-white text-white hover:bg-white hover:text-brand-primary'
+              %}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Decorative Elements -->
+    {% if section.settings.show_decoration %}
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-brand-neutral-900/20 to-transparent"></div>
+    {% endif %}
   </div>
-</div>
+</section>
+
 {% schema %}
 {
   "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Welcome to our store"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Optional subtitle above the main heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "info": "Brief description below the heading"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decoration",
+      "label": "Show decorative elements",
+      "default": true
+    }
+  ],
   "presets": [
     {
       "name": "Hero",

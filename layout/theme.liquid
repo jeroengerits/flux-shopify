@@ -1,22 +1,54 @@
 <!doctype html>
-<html lang='{{ request.locale.iso_code }}'>
+<html lang="{{ request.locale.iso_code }}" class="h-full">
   <head>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <script src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4' defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2937">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" as="script">
+    
+    <!-- Favicon and app icons -->
+    <!-- Add favicon.svg and apple-touch-icon.png to your assets folder when ready -->
+    
     <title>
-      {{ page_title }}
-      -
-      {{ shop.name }}
+      {% if page_title != shop.name %}
+        {{ page_title }} - {{ shop.name }}
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
     </title>
+    
+    <meta name="description" content="{{ page_description | default: shop.description | escape }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page_title | default: shop.name }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.origin }}{{ request.path }}">
+    <meta property="og:site_name" content="{{ shop.name }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | default: shop.name }}">
+    <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
+    
     {{ content_for_header }}
-    <style type='text/tailwindcss'>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    
+    <style type="text/tailwindcss">
       @theme {
+        /* Brand Colors */
         --color-brand-primary: #1f2937;
         --color-brand-secondary: #6b7280;
         --color-brand-accent: #3b82f6;
         --color-brand-success: #10b981;
         --color-brand-warning: #f59e0b;
         --color-brand-error: #ef4444;
+        
+        /* Neutral Colors */
         --color-brand-neutral-50: #fafafa;
         --color-brand-neutral-100: #f5f5f5;
         --color-brand-neutral-200: #e5e5e5;
@@ -28,16 +60,56 @@
         --color-brand-neutral-800: #262626;
         --color-brand-neutral-900: #171717;
         --color-brand-neutral-950: #0a0a0a;
+        
+        /* Focus styles for accessibility */
+        --color-focus-ring: #3b82f6;
+        --color-focus-offset: #ffffff;
+      }
+      
+      /* Custom focus styles */
+      .focus-visible:focus-visible {
+        outline: 2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Better text rendering */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
     </style>
   </head>
-  <body>
+  <body class="h-full  text-brand-neutral-900">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2 focus:rounded">
+      Skip to main content
+    </a>
+    
     {% sections 'header-group' %}
 
-    <div class='mt-[80px]'>
+    <main id="main-content" class="mt-[80px] min-h-[calc(100vh-80px)]">
       {{ content_for_layout }}
-    </div>
+    </main>
 
     {% sections 'footer-group' %}
+    
+    <!-- Performance monitoring -->
+    <script>
+      // Performance monitoring
+      if ('performance' in window) {
+        window.addEventListener('load', () => {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData) {
+            console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+          }
+        });
+      }
+    </script>
   </body>
 </html>

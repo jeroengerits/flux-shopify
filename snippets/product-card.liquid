@@ -1,44 +1,116 @@
 {% comment %}
   Product Card Snippet
-  {% render 'product-card', product: product %}
+  Renders a product card with image, title, type, and price
+  
+  Usage: {% render 'product-card', product: product, image_width: 800, image_height: 400 %}
+  
+  Parameters:
+  - product: The product object
+  - image_width: Image width (default: 400)
+  - image_height: Image height (default: 400)
+  - show_type: Whether to show product type (default: true)
+  - show_price: Whether to show price (default: true)
 {% endcomment %}
 
-<article>
+{% assign image_width = image_width | default: 400 %}
+{% assign image_height = image_height | default: 400 %}
+{% assign show_type = show_type | default: true %}
+{% assign show_price = show_price | default: true %}
+
+<article class="group">
   <a
-    href='{{ product.url }}'
-    class='border-brand-neutral-200 group block overflow-hidden rounded-xl border bg-white transition-shadow hover:shadow-sm'
+    href="{{ product.url }}"
+    class="block overflow-hidden rounded-xl border border-brand-neutral-200 bg-white transition-all duration-300 hover:shadow-lg hover:border-brand-neutral-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+    aria-labelledby="product-title-{{ product.id }}"
   >
-    <!-- Product Image -->
-    <div class='overflow-hidden'>
+    <!-- Product Image Container -->
+    <div class="relative aspect-square overflow-hidden bg-brand-neutral-50">
       {% if product.featured_image %}
         <img
-          src='{{ product.featured_image | image_url: width: image_width, height: image_height, crop: 'center' }}'
-          width='{{ image_width }}'
-          height='{{ image_height }}'
-          alt='{{ product.title | escape }}'
-          loading='lazy'
-          decoding='async'
-          class='transition-transform  group-hover:scale-110'
+          src="{{ product.featured_image | image_url: width: image_width, height: image_height, crop: 'center' }}"
+          srcset="
+            {{ product.featured_image | image_url: width: image_width, height: image_height, crop: 'center' }} 1x,
+            {{ product.featured_image | image_url: width: image_width | times: 2, height: image_height | times: 2, crop: 'center' }} 2x
+          "
+          width="{{ image_width }}"
+          height="{{ image_height }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         >
+        
+        <!-- Image Overlay on Hover -->
+        <div class="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10"></div>
       {% else %}
-        <div>
-          <svg width='64' height='64' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        <!-- Placeholder when no image -->
+        <div class="flex h-full w-full items-center justify-center text-brand-neutral-300">
+          <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="1.5"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
           </svg>
         </div>
       {% endif %}
+      
+      <!-- Quick View Button (Optional) -->
+      {% if product.available %}
+        <div class="absolute bottom-2 right-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-brand-neutral-700 shadow-sm backdrop-blur-sm">
+            Quick View
+          </span>
+        </div>
+      {% endif %}
     </div>
-    <!-- Product Info -->
-    <div class='px-4 py-3'>
-      <div class='flex flex-row items-start justify-between'>
-        <div class='flex flex-col gap-1'>
-          {% render 'item-title', text: product.title %}
-          {% render 'item-subtitle', text: product.type %}
+    
+    <!-- Product Information -->
+    <div class="p-4">
+      <div class="space-y-2">
+        <!-- Title and Type Row -->
+        <div class="flex flex-col gap-1">
+          <h3 
+            id="product-title-{{ product.id }}"
+            class="font-medium text-brand-neutral-900 line-clamp-2 group-hover:text-brand-accent transition-colors duration-200"
+          >
+            {{ product.title }}
+          </h3>
+          
+          {% if show_type and product.type %}
+            <p class="text-sm text-brand-neutral-500">
+              {{ product.type }}
+            </p>
+          {% endif %}
         </div>
-        <div class='flex flex-col items-end'>
-          {% render 'item-price', amount: product.price, size: 'md', weight: 'semibold', color: 'primary' %}
-        </div>
+        
+        <!-- Price Row -->
+        {% if show_price %}
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              {% if product.compare_at_price > product.price %}
+                <span class="text-sm text-brand-neutral-500 line-through">
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class="text-lg font-semibold text-brand-success">
+                  {{ product.price | money }}
+                </span>
+              {% else %}
+                <span class="text-lg font-semibold text-brand-neutral-900">
+                  {{ product.price | money }}
+                </span>
+              {% endif %}
+            </div>
+            
+            <!-- Availability Badge -->
+            {% unless product.available %}
+              <span class="inline-flex items-center rounded-full bg-brand-error/10 px-2 py-1 text-xs font-medium text-brand-error">
+                Out of Stock
+              </span>
+            {% endunless %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </a>
