@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang='{{ request.locale.iso_code }}'>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4' defer></script>
     <title>
       {{ page_title }}
       -
@@ -13,7 +13,9 @@
   <body>
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <div class='mt-[80px]'>
+      {{ content_for_layout }}
+    </div>
 
     {% sections 'footer-group' %}
   </body>

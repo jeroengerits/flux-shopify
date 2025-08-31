@@ -1,0 +1,8 @@
+{% comment %}
+  Section Title
+  {% render 'section-title', text: 'Hello' %}
+{% endcomment %}
+
+<h2 class='text-normal mb-4 text-pretty px-3 text-sm uppercase tracking-wider text-neutral-500/75'>
+  {{ text | escape }}
+</h2>

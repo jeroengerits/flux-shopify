@@ -1,0 +1,8 @@
+{% comment %}
+  Item Sub Title
+  {% render 'item-subtitle', text: 'Hello' %}
+{% endcomment %}
+
+<h3 class='text-pretty text-sm font-medium text-neutral-400'>
+  {{ text | escape | default: 'Unkown Subtitle Text' }}
+</h3>

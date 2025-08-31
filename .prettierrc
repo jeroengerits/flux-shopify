@@ -1,3 +1,14 @@
 {
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "semi": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 120,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "quoteProps": "consistent",
   "plugins": ["@shopify/prettier-plugin-liquid", "prettier-plugin-tailwindcss"]
 }

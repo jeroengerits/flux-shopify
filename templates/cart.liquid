@@ -4,64 +4,165 @@
   Responsive design matching the provided image layout
 {% endcomment %}
 
-<div class="px-6">
-  <form action="/cart" method="post" novalidate>
-    <div class="">
-      {% if cart.item_count > 0 %}
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <!-- Left Column: Shopping Cart -->
-          <div class="lg:col-span-2">
-            <div class="overflow-hidden rounded-lg  border border-neutral-200 bg-white">
-              <!-- Table Header -->
-              {% comment %}
-                <div class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-4 bg-neutral-50 border-b border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wide">
-                  <div class="md:col-span-6">Product Details</div>
-                  <div class="md:col-span-2 text-center">Quantity</div>
-                  <div class="md:col-span-2 text-center">Price</div>
-                  <div class="md:col-span-2 text-center">Total</div>
-                </div>
-              {% endcomment %}
+<div class='px-6'>
+  <form action='/cart' method='post' novalidate>
+    {% render 'section-title', text: 'Your Shopping Cart' %}
+    {% if cart.item_count > 0 %}
+      <div class='grid grid-cols-1 gap-8 lg:grid-cols-3'>
+        <!-- Left Column: Shopping Cart -->
+        <div class='lg:col-span-2'>
+          <div class='overflow-hidden rounded-lg  border border-neutral-200 bg-white'>
+            <!-- Table Header -->
+            {% comment %}
+              <div class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-4 bg-neutral-50 border-b border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wide">
+                <div class="md:col-span-6">Product Details</div>
+                <div class="md:col-span-2 text-center">Quantity</div>
+                <div class="md:col-span-2 text-center">Price</div>
+                <div class="md:col-span-2 text-center">Total</div>
+              </div>
+            {% endcomment %}
 
-              <!-- Cart Items -->
-              <div class="divide-y divide-neutral-200">
-                {% for item in cart.items %}
-                  <div class="p-4 md:p-6" data-item-key="{{ item.key }}">
-                    <!-- Mobile Layout -->
-                    <div class="block space-y-4 md:hidden">
-                      <!-- Product Image and Details -->
-                      <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0">
-                          <a href="{{ item.url }}" class="block">
+            <!-- Cart Items -->
+            <div class='divide-y divide-neutral-200'>
+              {% for item in cart.items %}
+                <div class='p-4 md:p-6' data-item-key='{{ item.key }}'>
+                  <!-- Mobile Layout -->
+                  <div class='block space-y-4 md:hidden'>
+                    <!-- Product Image and Details -->
+                    <div class='flex items-start space-x-4'>
+                      <div class='flex-shrink-0'>
+                        <a href='{{ item.url }}' class='block'>
+                          {% if item.image %}
+                            <img
+                              src='{{ item.image | image_url: width: 200, crop: 'center' }}'
+                              alt='{{ item.image.alt | escape }}'
+                              loading='lazy'
+                              width='200'
+                              height='200'
+                              class='h-24 w-24 rounded-lg object-cover'
+                            >
+                          {% else %}
+                            {{ 'product-1' | placeholder_svg_tag: 'w-24 h-24 text-neutral-300 rounded-lg' }}
+                          {% endif %}
+                        </a>
+                      </div>
+
+                      <div class='min-w-0 flex-1'>
+                        <h3 class='text-lg font-semibold text-neutral-900'>
+                          <a href='{{ item.url }}' class='transition-colors hover:text-neutral-700'>
+                            {{ item.product.title }}
+                          </a>
+                        </h3>
+
+                        <div class='text-base font-normal text-neutral-500'>
+                          {{ item.product.type }}
+                        </div>
+
+                        {% if item.product.has_only_default_variant == false %}
+                          <div class='mt-1'>
+                            {% for option in item.options_with_values %}
+                              <span class='inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800'>
+                                {{ option.value }}
+                              </span>
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+
+                        <button
+                          type='button'
+                          class='mt-2 text-sm text-red-600 transition-colors hover:text-red-800'
+                          data-action='remove'
+                          data-item-key='{{ item.key }}'
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Price, Quantity, and Total -->
+                    <div class='grid grid-cols-3 gap-4 text-center'>
+                      <div>
+                        <span class='text-sm font-medium text-neutral-500'>Price</span>
+                        <p class='text-lg font-semibold text-neutral-900'>{{ item.final_price | money }}</p>
+                      </div>
+                      <div>
+                        <div class='flex justify-center md:col-span-2'>
+                          <div class='flex items-center overflow-hidden rounded-lg border border-neutral-300 '>
+                            <button
+                              type='button'
+                              class='flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
+                              data-action='decrease'
+                              data-item-key='{{ item.key }}'
+                              {% if item.quantity <= 1 %}
+                                disabled
+                              {% endif %}
+                            >
+                              −
+                            </button>
+                            <span class='w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
+                              {{ item.quantity }}
+                            </span>
+                            <input
+                              type='hidden'
+                              name='updates[]'
+                              data-item-key='{{ item.key }}'
+                              value='{{ item.quantity }}'
+                            >
+                            <button
+                              type='button'
+                              class='flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
+                              data-action='increase'
+                              data-item-key='{{ item.key }}'
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <span class='font-mediu m   text-sm text-neutral-500'>Total</span>
+                        <p class='text-lg font-semibold text-neutral-900'>{{ item.final_line_price | money }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Desktop Layout -->
+                  <div class='hidden items-center gap-4 md:grid md:grid-cols-12'>
+                    <!-- Product Details -->
+                    <div class='md:col-span-6'>
+                      <div class='flex items-center space-x-4'>
+                        <div class='flex-shrink-0'>
+                          <a href='{{ item.url }}' class='block'>
                             {% if item.image %}
                               <img
-                                src="{{ item.image | image_url: width: 200, crop: 'center' }}"
-                                alt="{{ item.image.alt | escape }}"
-                                loading="lazy"
-                                width="200"
-                                height="200"
-                                class="h-24 w-24 rounded-lg object-cover"
+                                src='{{ item.image | image_url: width: 200, crop: 'center' }}'
+                                alt='{{ item.image.alt | escape }}'
+                                loading='lazy'
+                                width='200'
+                                height='200'
+                                class='h-24 w-24 rounded-lg object-cover'
                               >
                             {% else %}
-                              {{ 'product-1' | placeholder_svg_tag: 'w-24 h-24 text-neutral-300 rounded-lg' }}
+                              {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 text-neutral-300 rounded-lg' }}
                             {% endif %}
                           </a>
                         </div>
 
-                        <div class="min-w-0 flex-1">
-                          <h3 class="text-lg font-semibold text-neutral-900">
-                            <a href="{{ item.url }}" class="transition-colors hover:text-neutral-700">
+                        <div class='min-w-0 flex-1'>
+                          <h3 class='text-lg font-semibold text-neutral-900'>
+                            <a href='{{ item.url }}' class='transition-colors hover:text-neutral-700'>
                               {{ item.product.title }}
                             </a>
                           </h3>
 
-                          <div class="text-base font-normal text-neutral-500">
+                          <div class='text-base font-normal text-neutral-500'>
                             {{ item.product.type }}
                           </div>
 
                           {% if item.product.has_only_default_variant == false %}
-                            <div class="mt-1">
+                            <div class='mt-1'>
                               {% for option in item.options_with_values %}
-                                <span class="inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800">
+                                <span class='inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800'>
                                   {{ option.value }}
                                 </span>
                               {% endfor %}
@@ -69,229 +170,129 @@
                           {% endif %}
 
                           <button
-                            type="button"
-                            class="mt-2 text-sm text-red-600 transition-colors hover:text-red-800"
-                            data-action="remove"
-                            data-item-key="{{ item.key }}"
+                            type='button'
+                            class='text-xs tracking-wide text-neutral-600 transition-colors hover:text-red-600'
+                            data-action='remove'
+                            data-item-key='{{ item.key }}'
                           >
                             Remove
                           </button>
                         </div>
                       </div>
+                    </div>
 
-                      <!-- Price, Quantity, and Total -->
-                      <div class="grid grid-cols-3 gap-4 text-center">
-                        <div>
-                          <span class="text-sm font-medium text-neutral-500">Price</span>
-                          <p class="text-lg font-semibold text-neutral-900">{{ item.final_price | money }}</p>
-                        </div>
-                        <div>
-                          <div class="flex justify-center md:col-span-2">
-                            <div class="flex items-center overflow-hidden rounded-lg border border-neutral-300 ">
-                              <button
-                                type="button"
-                                class="flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40"
-                                data-action="decrease"
-                                data-item-key="{{ item.key }}"
-                                {% if item.quantity <= 1 %}
-                                  disabled
-                                {% endif %}
-                              >
-                                −
-                              </button>
-                              <span class="w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900">
-                                {{ item.quantity }}
-                              </span>
-                              <input
-                                type="hidden"
-                                name="updates[]"
-                                data-item-key="{{ item.key }}"
-                                value="{{ item.quantity }}"
-                              >
-                              <button
-                                type="button"
-                                class="flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40"
-                                data-action="increase"
-                                data-item-key="{{ item.key }}"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <span class="font-mediu m   text-sm text-neutral-500">Total</span>
-                          <p class="text-lg font-semibold text-neutral-900">{{ item.final_line_price | money }}</p>
-                        </div>
+                    <!-- Quantity -->
+                    <div class='flex justify-center md:col-span-2'>
+                      <div class='flex items-center overflow-hidden rounded-lg border border-neutral-300 '>
+                        <button
+                          type='button'
+                          class='flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
+                          data-action='decrease'
+                          data-item-key='{{ item.key }}'
+                          {% if item.quantity <= 1 %}
+                            disabled
+                          {% endif %}
+                        >
+                          −
+                        </button>
+                        <span class='w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
+                          {{ item.quantity }}
+                        </span>
+                        <button
+                          type='button'
+                          class='flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
+                          data-action='increase'
+                          data-item-key='{{ item.key }}'
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
 
-                    <!-- Desktop Layout -->
-                    <div class="hidden items-center gap-4 md:grid md:grid-cols-12">
-                      <!-- Product Details -->
-                      <div class="md:col-span-6">
-                        <div class="flex items-center space-x-4">
-                          <div class="flex-shrink-0">
-                            <a href="{{ item.url }}" class="block">
-                              {% if item.image %}
-                                <img
-                                  src="{{ item.image | image_url: width: 200, crop: 'center' }}"
-                                  alt="{{ item.image.alt | escape }}"
-                                  loading="lazy"
-                                  width="200"
-                                  height="200"
-                                  class="h-24 w-24 rounded-lg object-cover"
-                                >
-                              {% else %}
-                                {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 text-neutral-300 rounded-lg' }}
-                              {% endif %}
-                            </a>
-                          </div>
+                    <!-- Price -->
+                    <div class='text-center md:col-span-2'>
+                      <span class='text-lg font-semibold text-neutral-900'>{{ item.final_price | money }}</span>
+                    </div>
 
-                          <div class="min-w-0 flex-1">
-                            <h3 class="text-lg font-semibold text-neutral-900">
-                              <a href="{{ item.url }}" class="transition-colors hover:text-neutral-700">
-                                {{ item.product.title }}
-                              </a>
-                            </h3>
-
-                            <div class="text-base font-normal text-neutral-500">
-                              {{ item.product.type }}
-                            </div>
-
-                            {% if item.product.has_only_default_variant == false %}
-                              <div class="mt-1">
-                                {% for option in item.options_with_values %}
-                                  <span class="inline-block rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-800">
-                                    {{ option.value }}
-                                  </span>
-                                {% endfor %}
-                              </div>
-                            {% endif %}
-
-                            <button
-                              type="button"
-                              class="text-xs tracking-wide text-neutral-600 transition-colors hover:text-red-600"
-                              data-action="remove"
-                              data-item-key="{{ item.key }}"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Quantity -->
-                      <div class="flex justify-center md:col-span-2">
-                        <div class="flex items-center overflow-hidden rounded-lg border border-neutral-300 ">
-                          <button
-                            type="button"
-                            class="flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40"
-                            data-action="decrease"
-                            data-item-key="{{ item.key }}"
-                            {% if item.quantity <= 1 %}
-                              disabled
-                            {% endif %}
-                          >
-                            −
-                          </button>
-                          <span class="w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900">
-                            {{ item.quantity }}
-                          </span>
-                          <button
-                            type="button"
-                            class="flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40"
-                            data-action="increase"
-                            data-item-key="{{ item.key }}"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-
-                      <!-- Price -->
-                      <div class="text-center md:col-span-2">
-                        <span class="text-lg font-semibold text-neutral-900">{{ item.final_price | money }}</span>
-                      </div>
-
-                      <!-- Total -->
-                      <div class="text-center md:col-span-2">
-                        <span class="text-lg font-semibold text-neutral-900">{{ item.final_line_price | money }}</span>
-                      </div>
+                    <!-- Total -->
+                    <div class='text-center md:col-span-2'>
+                      <span class='text-lg font-semibold text-neutral-900'>{{ item.final_line_price | money }}</span>
                     </div>
                   </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column: Order Summary -->
-          <div class="lg:col-span-1">
-            <div class="sticky top-6  rounded-lg border border-neutral-200 bg-white p-6">
-              <!-- Total Cost -->
-              <div class="flex items-center justify-between">
-                <span class="text-lg font-medium uppercase tracking-wide text-neutral-500">Total Cost</span>
-                <span class="text-2xl font-bold text-neutral-900">
-                  {{ cart.total_price | money }}
-                </span>
-              </div>
-
-              <!-- Checkout Button -->
-              <div class="mt-6">
-                <button
-                  type="submit"
-                  name="checkout"
-                  class="w-full rounded-lg bg-neutral-700 py-4 text-lg font-medium text-white transition-colors duration-200 hover:bg-neutral-800"
-                >
-                  Checkout
-                </button>
-              </div>
-
-              <!-- Continue Shopping Link -->
-              <div class="mt-4 text-center">
-                <a
-                  href="/collections/all"
-                  class="inline-flex items-center font-medium text-neutral-600 transition-colors hover:text-neutral-800"
-                >
-                  Continue Shopping
-                </a>
-              </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
-      {% else %}
-        <!-- Empty Cart State -->
-        <div class="py-16 text-center lg:py-24">
-          <div class="mx-auto max-w-md">
-            <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-neutral-100">
-              <svg class="h-12 w-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-              </svg>
+
+        <!-- Right Column: Order Summary -->
+        <div class='lg:col-span-1'>
+          <div class='sticky top-6  rounded-lg border border-neutral-200 bg-white p-6'>
+            <!-- Total Cost -->
+            <div class='flex items-center justify-between'>
+              <span class='text-lg font-medium  text-neutral-500'
+                >Total Cost <small class='font-normal'>Including Taxes</small>
+              </span>
+              <span class='text-2xl font-bold text-neutral-900'>
+                {{ cart.total_price | money }}
+              </span>
             </div>
-            <h2 class="mb-4 text-2xl font-bold text-neutral-900 sm:text-3xl">Your cart is empty</h2>
-            <p class="mb-8 text-lg text-neutral-600">
-              Looks like you haven't added anything to your cart yet. Start shopping to fill it up!
-            </p>
-            <a
-              href="/collections/all"
-              class="inline-flex items-center rounded-lg bg-neutral-800 px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-neutral-900"
-            >
-              <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-              </svg>
-              Start Shopping
-            </a>
+
+            <!-- Checkout Button -->
+            <div class='mt-6'>
+              <button
+                type='submit'
+                name='checkout'
+                class='w-full rounded-lg bg-neutral-700 py-4 text-lg font-medium text-white transition-colors duration-200 hover:bg-neutral-800'
+              >
+                Checkout
+              </button>
+            </div>
+
+            <!-- Continue Shopping Link -->
+            <div class='mt-4 text-center'>
+              <a
+                href='/collections/all'
+                class='inline-flex items-center font-medium text-neutral-600 transition-colors hover:text-neutral-800'
+              >
+                Continue Shopping
+              </a>
+            </div>
           </div>
         </div>
-      {% endif %}
-    </div>
+      </div>
+    {% else %}
+      <!-- Empty Cart State -->
+      <div class='py-16 text-center lg:py-24'>
+        <div class='mx-auto max-w-md'>
+          <div class='mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-neutral-100'>
+            <svg class='h-12 w-12 text-neutral-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+          </div>
+          <h2 class='mb-4 text-2xl font-bold text-neutral-900 sm:text-3xl'>Your cart is empty</h2>
+          <p class='mb-8 text-lg text-neutral-600'>
+            Looks like you haven't added anything to your cart yet. Start shopping to fill it up!
+          </p>
+          <a
+            href='/collections/all'
+            class='inline-flex items-center rounded-lg bg-neutral-800 px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-neutral-900'
+          >
+            <svg class='mr-2 h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Start Shopping
+          </a>
+        </div>
+      </div>
+    {% endif %}
   </form>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // Quantity controls
-    document.querySelectorAll('button[data-action="decrease"], button[data-action="increase"]').forEach((btn) => {
+    document.querySelectorAll('button[data-action="decrease"], button[data-action="increase"]').forEach(btn => {
       btn.addEventListener('click', function () {
         const action = this.dataset.action;
         const itemKey = this.dataset.itemKey;
@@ -337,7 +338,7 @@
     });
 
     // Remove item functionality
-    document.querySelectorAll('button[data-action="remove"]').forEach((btn) => {
+    document.querySelectorAll('button[data-action="remove"]').forEach(btn => {
       btn.addEventListener('click', function () {
         const itemKey = this.dataset.itemKey;
 

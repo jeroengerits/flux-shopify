@@ -1,0 +1,8 @@
+{% comment %}
+  Item Title
+  {% render 'item-title', text: 'Hello' %}
+{% endcomment %}
+
+<h3 class='text-md text-pretty font-semibold text-neutral-700'>
+  {{ text | escape | default: 'Unkown Title Text' }}
+</h3>
