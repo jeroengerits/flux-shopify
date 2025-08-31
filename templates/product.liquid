@@ -20,9 +20,11 @@
     <div class='text-brand-neutral-800  whitespace-nowrap  text-3xl font-bold'>
       {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
     </div>
+
     <div class='mb-6 mt-4'>
       {% render 'paragraph', text: product.description %}
     </div>
+
     {% form 'product', product %}
       <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'>
       {% render 'button',
