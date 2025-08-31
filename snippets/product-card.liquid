@@ -83,9 +83,9 @@
                   color: 'muted',
                   class: 'line-through'
                 %}
-                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'success' %}
-              {% else %}
                 {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'primary' %}
+              {% else %}
+                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'muted' %}
               {% endif %}
             </div>
 

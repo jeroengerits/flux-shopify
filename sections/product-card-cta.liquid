@@ -18,8 +18,27 @@
           {{ product.type }}
         </p>
       </div>
-      <div class='text-brand-neutral-800  whitespace-nowrap  text-3xl font-bold'>
-        {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
+
+      <!-- Price Row -->
+      <div class='flex items-center justify-between'>
+        <div class='flex items-center gap-2'>
+          {% if product.compare_at_price > product.price %}
+            {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
+            {% render 'item-price',
+              amount: product.compare_at_price,
+              size: 'sm',
+              color: 'muted',
+              class: 'line-through'
+            %}
+          {% else %}
+            {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'primary' %}
+          {% endif %}
+        </div>
+
+        <!-- Availability Badge -->
+        {% unless product.available %}
+          {% render 'tag', text: 'Out of Stock', variant: 'pill', size: 'sm', color: 'error' %}
+        {% endunless %}
       </div>
 
       <div class=' mb-4 mt-4'>
