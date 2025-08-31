@@ -14,11 +14,18 @@
       "name": "Breadcrumb",
       "settings": {}
     },
+    "spacer": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 60
+      }
+    },
     "page": {
       "type": "design",
       "name": "Page Design",
       "settings": {}
     }
   },
-  "order": ["breadcrumb", "page"]
+  "order": ["breadcrumb", "spacer", "page"]
 }
