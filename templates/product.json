@@ -14,8 +14,15 @@
       "name": "Breadcrumb",
       "settings": {}
     },
-    "product": {
-      "type": "product",
+    "spacer": {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": {
+        "height": 24
+      }
+    },
+    "product-card-cta": {
+      "type": "product-card-cta",
       "name": "Product",
       "settings": {}
     },
@@ -25,5 +32,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumb", "product", "scents-overview"]
+  "order": ["breadcrumb", "spacer", "product-card-cta", "scents-overview"]
 }
