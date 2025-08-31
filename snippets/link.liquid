@@ -15,9 +15,9 @@
 {% assign disabled = disabled | default: false %}
 
 {% if disabled %}
-  {% assign link_classes = 'text-brand-neutral-400 cursor-not-allowed pointer-events-none' %}
+  {% assign link_classes = ' cursor-not-allowed pointer-events-none transition-all' %}
 {% else %}
-  {% assign link_classes = 'text-brand-neutral-600 hover:text-brand-neutral-900 transition-colors' %}
+  {% assign link_classes = ' transition-all' %}
 {% endif %}
 
 {% if external %}

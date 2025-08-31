@@ -1,0 +1,35 @@
+<div class='ruler' style='height: {{ section.settings.height }}px;'>
+  <div
+    class='block w-full bg-black '
+    style='
+      height: {{ section.settings.height }}px;
+      background-color: black;
+    '
+  >
+    as
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ruler",
+  "settings": [
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ruler",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}
