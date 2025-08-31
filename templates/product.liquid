@@ -1,70 +1,72 @@
-<div class='flex flex-col items-start gap-12 px-6 md:flex-row'>
-  <div class='w-full md:w-1/2'>
-    <img
-      class='w-full rounded-xl'
-      src='{{ product.featured_image | image_url: width: 800 }}'
-      alt='{{ product.featured_image.alt }}'
-      width='800'
-      height='800'
-    >
-  </div>
-  <div class='flex w-full flex-col gap-2 md:w-1/2 md:pr-6 md:pt-6'>
-    <h1 class='text-brand-neutral-800 whitespace-nowrap  text-xl font-medium'>
-      {{ product.title }}
-    </h1>
-    <div class='text-brand-neutral-500 mb-2 text-base'>
-      <p>
-        {{ product.type }}
-      </p>
+<div>
+  <div class='flex flex-col items-start gap-12 px-6 md:flex-row'>
+    <div class='w-full md:w-1/2'>
+      <img
+        class='w-full rounded-xl'
+        src='{{ product.featured_image | image_url: width: 800 }}'
+        alt='{{ product.featured_image.alt }}'
+        width='800'
+        height='800'
+      >
     </div>
-    <div class='text-brand-neutral-800  whitespace-nowrap  text-3xl font-bold'>
-      {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
+    <div class='flex w-full flex-col gap-2 md:w-1/2 md:pr-6 md:pt-6'>
+      <h1 class='text-brand-neutral-800 whitespace-nowrap  text-xl font-medium'>
+        {{ product.title }}
+      </h1>
+      <div class='text-brand-neutral-500 mb-2 text-base'>
+        <p>
+          {{ product.type }}
+        </p>
+      </div>
+      <div class='text-brand-neutral-800  whitespace-nowrap  text-3xl font-bold'>
+        {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
+      </div>
+
+      <div class=' mb-4 mt-4'>
+        {% render 'paragraph', text: product.description %}
+      </div>
+
+      <div class='mb-6 flex flex-wrap items-center justify-start gap-2'>
+        <!-- Seasons -->
+        {% if product.metafields.shopify.season %}
+          {% for season in product.metafields.shopify.season.value %}
+            {% render 'tag', text: season.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+          {% endfor %}
+        {% endif %}
+
+        <!-- Occasions -->
+        {% if product.metafields.shopify.occasion %}
+          {% for occasion in product.metafields.shopify.occasion.value %}
+            {% render 'tag', text: occasion.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+          {% endfor %}
+        {% endif %}
+
+        <!-- Scents -->
+        {% if product.metafields.shopify.scent %}
+          {% for scent in product.metafields.shopify.scent.value %}
+            {% render 'tag', text: scent.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+          {% endfor %}
+        {% endif %}
+
+        <!-- Target Gender -->
+        {% if product.metafields.shopify['target-gender'] %}
+          {% for gender in product.metafields.shopify['target-gender'].value %}
+            {% render 'tag', text: gender.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      {% form 'product', product %}
+        <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'>
+        {% render 'button',
+          type: 'submit',
+          label: 'Add to cart',
+          variant: 'primary',
+          size: 'lg',
+          full_width: false,
+          disabled: false
+        %}
+      {% endform %}
     </div>
-
-    <div class=' mb-4 mt-4'>
-      {% render 'paragraph', text: product.description %}
-    </div>
-
-    <div class='mb-6 flex flex-wrap items-center justify-start gap-2'>
-      <!-- Seasons -->
-      {% if product.metafields.shopify.season %}
-        {% for season in product.metafields.shopify.season.value %}
-          {% render 'tag', text: season.label, variant: 'outline', size: 'sm', color: 'secondary' %}
-        {% endfor %}
-      {% endif %}
-
-      <!-- Occasions -->
-      {% if product.metafields.shopify.occasion %}
-        {% for occasion in product.metafields.shopify.occasion.value %}
-          {% render 'tag', text: occasion.label, variant: 'outline', size: 'sm', color: 'secondary' %}
-        {% endfor %}
-      {% endif %}
-
-      <!-- Scents -->
-      {% if product.metafields.shopify.scent %}
-        {% for scent in product.metafields.shopify.scent.value %}
-          {% render 'tag', text: scent.label, variant: 'outline', size: 'sm', color: 'secondary' %}
-        {% endfor %}
-      {% endif %}
-
-      <!-- Target Gender -->
-      {% if product.metafields.shopify['target-gender'] %}
-        {% for gender in product.metafields.shopify['target-gender'].value %}
-          {% render 'tag', text: gender.label, variant: 'outline', size: 'sm', color: 'secondary' %}
-        {% endfor %}
-      {% endif %}
-    </div>
-
-    {% form 'product', product %}
-      <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'>
-      {% render 'button',
-        type: 'submit',
-        label: 'Add to cart',
-        variant: 'primary',
-        size: 'lg',
-        full_width: false,
-        disabled: false
-      %}
-    {% endform %}
   </div>
 </div>
