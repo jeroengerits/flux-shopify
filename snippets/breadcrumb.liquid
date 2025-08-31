@@ -10,8 +10,6 @@
 {% endcomment %}
 
 {%- liquid
-  assign show_home = show_home | default: true
-  assign custom_items = custom_items | default: null
   assign current_title = current_title | default: page.title
   assign current_url = current_url | default: page.url
 
@@ -78,7 +76,7 @@
 
   {%- comment -%} Current page title {%- endcomment -%}
   {%- if current_title != blank -%}
-    {%- if show_home or custom_items != null -%}
+    {%- if custom_items != null -%}
       <svg
         class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
         aria-hidden='true'

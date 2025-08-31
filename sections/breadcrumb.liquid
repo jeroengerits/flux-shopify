@@ -47,13 +47,13 @@
 
 <div class='breadcrumb-section pb-6'>
   <div class='px-6'>
-    <nav class='flex items-center gap-2 text-sm' aria-label='Breadcrumb'>
+    <nav class='flex items-center gap-1 text-sm' aria-label='Breadcrumb'>
       {%- comment -%} Home link {%- endcomment -%}
       {% render 'link', text: 'Home', url: routes.root_url %}
 
       {%- comment -%} Breadcrumb separator {%- endcomment -%}
       <svg
-        class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
+        class='text-brand-neutral-300 block h-3 w-3 rtl:rotate-180'
         aria-hidden='true'
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
@@ -63,11 +63,25 @@
       </svg>
 
       {%- comment -%} Dynamic breadcrumb items based on template {%- endcomment -%}
-      {%- case breadcrumb_items -%}
-        {%- when 'product' -%}
-          {%- if product.collections.size > 0 -%}
-            {%- assign primary_collection = product.collections.first -%}
-            {% render 'link', text: primary_collection.title, url: primary_collection.url %}
+      {% comment %}
+        {%- case breadcrumb_items -%}
+          {%- when 'product' -%}
+            {%- if product.collections.size > 0 -%}
+              {%- assign primary_collection = product.collections.first -%}
+              {% render 'link', text: primary_collection.title, url: primary_collection.url %}
+              <svg
+                class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
+                aria-hidden='true'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 6 10'
+              >
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
+              </svg>
+            {%- endif -%}
+
+          {%- when 'article' -%}
+            {% render 'link', text: blog.title, url: blog.url %}
             <svg
               class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
               aria-hidden='true'
@@ -77,20 +91,8 @@
             >
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
             </svg>
-          {%- endif -%}
-
-        {%- when 'article' -%}
-          {% render 'link', text: blog.title, url: blog.url %}
-          <svg
-            class='text-brand-neutral-400 block h-3 w-3 rtl:rotate-180'
-            aria-hidden='true'
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 6 10'
-          >
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
-          </svg>
-      {%- endcase -%}
+        {%- endcase -%}
+      {% endcomment %}
 
       {%- comment -%} Current page title {%- endcomment -%}
       <span class='text-brand-neutral-900 font-medium' aria-current='page'>
@@ -106,14 +108,7 @@
 {% schema %}
 {
   "name": "Breadcrumb",
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_breadcrumbs",
-      "label": "Show breadcrumbs",
-      "default": true
-    }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Breadcrumb",

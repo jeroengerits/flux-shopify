@@ -15,7 +15,11 @@
       </ul>
       <ul class='flex items-center justify-between gap-4 text-sm'>
         <li>
-          <a href='{{ routes.cart_url }}' class='text-brand-neutral-700 hover:text-brand-neutral-900 transition-colors'>
+          <a
+            href='{{ routes.cart_url }}'
+            class='text-brand-neutral-700 hover:text-brand-neutral-900 flex items-center gap-2 transition-colors'
+          >
+            <span>Your Cart</span>
             {% render 'cart-icon', amount: cart.item_count, show_label: false %}
           </a>
         </li>

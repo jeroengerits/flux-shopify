@@ -1,9 +1,3 @@
-{% comment %}
-  Cart page template
-  Shows all products in the cart with quantity controls and remove functionality
-  Responsive design matching the provided image layout
-{% endcomment %}
-
 <div class='px-6'>
   <form action='/cart' method='post' novalidate>
     {% if cart.item_count > 0 %}
