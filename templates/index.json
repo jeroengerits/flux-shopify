@@ -14,7 +14,7 @@
       "name": "Hero",
       "settings": {}
     },
-    "collection_mX4Kew": {
+    "featured_collection": {
       "type": "collection",
       "name": "Collection",
       "settings": {
@@ -26,6 +26,6 @@
   },
   "order": [
     "hero",
-    "collection_mX4Kew"
+    "featured_collection"
   ]
 }
