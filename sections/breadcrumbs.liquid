@@ -48,18 +48,14 @@
 <div class='px-6'>
   <nav class='flex items-center gap-1 text-sm' aria-label='Breadcrumb'>
     {% render 'link', text: 'Home', url: routes.root_url %}
-    <svg
-      class='text-brand-neutral-300 block h-3 w-3 rtl:rotate-180'
-      aria-hidden='true'
-      xmlns='http://www.w3.org/2000/svg'
-      fill='none'
-      viewBox='0 0 6 10'
-    >
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
-    </svg>
+    {% render 'chevron' %}
+    {% if breadcrumb_items == 'product' %}
+      {% render 'link', text: 'Shop', url: '/collections/all' %}
+      {% render 'chevron' %}
+    {% endif %}
     <span class='text-brand-neutral-900 font-medium' aria-current='page'>
-      {% if breadcrumb_items == 'collection' and collection.title == 'Products' %}
-        All Products
+      {% if current_title == 'Products' %}
+        Shop
       {% else %}
         {{ current_title }}
       {% endif %}
