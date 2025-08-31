@@ -4,6 +4,8 @@
       class='w-full rounded-xl'
       src='{{ product.featured_image | image_url: width: 800 }}'
       alt='{{ product.featured_image.alt }}'
+      width='800'
+      height='800'
     >
   </div>
   <div class='flex w-full flex-col gap-2 md:w-1/2 md:pr-6 md:pt-6'>
@@ -20,16 +22,19 @@
         {{ product.price | money }}
       </p>
     </div>
-    <div class='mb-6 mt-4 text-base text-neutral-500'>
-      <p>
-        {{ product.description }}
-      </p>
+    <div class='mb-6 mt-4'>
+      {% render 'paragraph', text: product.description %}
     </div>
     {% form 'product', product %}
       <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'>
-      <button class='inline-flex rounded-lg bg-neutral-700 px-6 py-4 text-lg font-medium text-white transition-colors duration-200 hover:bg-neutral-800 '>
-        Add to cart
-      </button>
+      {% render 'button',
+        type: 'submit',
+        label: 'Add to cart',
+        variant: 'primary',
+        size: 'lg',
+        full_width: false,
+        disabled: false
+      %}
     {% endform %}
   </div>
 </div>

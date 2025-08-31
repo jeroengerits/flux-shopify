@@ -68,14 +68,15 @@
                           </div>
                         {% endif %}
 
-                        <button
-                          type='button'
-                          class='mt-2 text-sm text-red-600 transition-colors hover:text-red-800'
-                          data-action='remove'
-                          data-item-key='{{ item.key }}'
-                        >
-                          Remove
-                        </button>
+                        {% render 'button',
+                          type: 'button',
+                          label: 'Remove',
+                          variant: 'ghost',
+                          size: 'sm',
+                          class: 'mt-2 text-red-600 hover:text-red-800',
+                          data_action: 'remove',
+                          data_item_key: item.key
+                        %}
                       </div>
                     </div>
 
@@ -88,17 +89,7 @@
                       <div>
                         <div class='flex justify-center md:col-span-2'>
                           <div class='flex items-center overflow-hidden rounded-lg border border-neutral-300 '>
-                            <button
-                              type='button'
-                              class='flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
-                              data-action='decrease'
-                              data-item-key='{{ item.key }}'
-                              {% if item.quantity <= 1 %}
-                                disabled
-                              {% endif %}
-                            >
-                              −
-                            </button>
+                            {% render 'button', type: 'button', label: '−', variant: 'outline', size: 'sm', class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40', data_action: 'decrease', data_item_key: item.key, disabled: item.quantity <= 1 %}
                             <span class='w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
                               {{ item.quantity }}
                             </span>
@@ -108,14 +99,15 @@
                               data-item-key='{{ item.key }}'
                               value='{{ item.quantity }}'
                             >
-                            <button
-                              type='button'
-                              class='flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
-                              data-action='increase'
-                              data-item-key='{{ item.key }}'
-                            >
-                              +
-                            </button>
+                            {% render 'button',
+                              type: 'button',
+                              label: '+',
+                              variant: 'outline',
+                              size: 'sm',
+                              class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40',
+                              data_action: 'increase',
+                              data_item_key: item.key
+                            %}
                           </div>
                         </div>
                       </div>
@@ -169,14 +161,15 @@
                             </div>
                           {% endif %}
 
-                          <button
-                            type='button'
-                            class='text-xs tracking-wide text-neutral-600 transition-colors hover:text-red-600'
-                            data-action='remove'
-                            data-item-key='{{ item.key }}'
-                          >
-                            Remove
-                          </button>
+                          {% render 'button',
+                            type: 'button',
+                            label: 'Remove',
+                            variant: 'ghost',
+                            size: 'sm',
+                            class: 'text-xs tracking-wide text-neutral-600 transition-colors hover:text-red-600',
+                            data_action: 'remove',
+                            data_item_key: item.key
+                          %}
                         </div>
                       </div>
                     </div>
@@ -184,28 +177,19 @@
                     <!-- Quantity -->
                     <div class='flex justify-center md:col-span-2'>
                       <div class='flex items-center overflow-hidden rounded-lg border border-neutral-300 '>
-                        <button
-                          type='button'
-                          class='flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
-                          data-action='decrease'
-                          data-item-key='{{ item.key }}'
-                          {% if item.quantity <= 1 %}
-                            disabled
-                          {% endif %}
-                        >
-                          −
-                        </button>
+                        {% render 'button', type: 'button', label: '−', variant: 'outline', size: 'sm', class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-r border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40', data_action: 'decrease', data_item_key: item.key, disabled: item.quantity <= 1 %}
                         <span class='w-16 bg-white py-3 text-center text-lg font-semibold text-neutral-900'>
                           {{ item.quantity }}
                         </span>
-                        <button
-                          type='button'
-                          class='flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40'
-                          data-action='increase'
-                          data-item-key='{{ item.key }}'
-                        >
-                          +
-                        </button>
+                        {% render 'button',
+                          type: 'button',
+                          label: '+',
+                          variant: 'outline',
+                          size: 'sm',
+                          class: 'flex h-10 w-10 cursor-pointer items-center justify-center border-l border-neutral-300 bg-white text-lg font-medium text-neutral-700 transition-all hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-40',
+                          data_action: 'increase',
+                          data_item_key: item.key
+                        %}
                       </div>
                     </div>
 
@@ -240,13 +224,14 @@
 
             <!-- Checkout Button -->
             <div class='mt-6'>
-              <button
-                type='submit'
-                name='checkout'
-                class='w-full rounded-lg bg-neutral-700 py-4 text-lg font-medium text-white transition-colors duration-200 hover:bg-neutral-800'
-              >
-                Checkout
-              </button>
+              {% render 'button',
+                type: 'submit',
+                label: 'Checkout',
+                variant: 'primary',
+                size: 'lg',
+                full_width: true,
+                class: 'bg-neutral-700 hover:bg-neutral-800'
+              %}
             </div>
 
             <!-- Continue Shopping Link -->
@@ -274,15 +259,15 @@
           <p class='mb-8 text-lg text-neutral-600'>
             Looks like you haven't added anything to your cart yet. Start shopping to fill it up!
           </p>
-          <a
-            href='/collections/all'
-            class='inline-flex items-center rounded-lg bg-neutral-800 px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-neutral-900'
-          >
-            <svg class='mr-2 h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            Start Shopping
-          </a>
+          {% render 'button',
+            type: 'button',
+            label: 'Start Shopping',
+            variant: 'primary',
+            size: 'lg',
+            class: 'bg-neutral-800 hover:bg-neutral-900',
+            icon_left: 'M12 6v6m0 0v6m0-6h6m-6 0H6',
+            href: '/collections/all'
+          %}
         </div>
       </div>
     {% endif %}

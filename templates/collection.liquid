@@ -24,61 +24,7 @@
     <!-- Product Grid -->
     <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {% for product in collection.products %}
-        <div class='overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md'>
-          <!-- Product Image -->
-          <div class='aspect-square bg-neutral-100'>
-            <a href='{{ product.url }}' class='block h-full'>
-              {% if product.featured_image %}
-                <img
-                  src='{{ product.featured_image | image_url: width: 800, crop: 'center' }}'
-                  alt='{{ product.featured_image.alt | escape }}'
-                  loading='lazy'
-                  width='400'
-                  height='400'
-                  class='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
-                >
-              {% else %}
-                <div class='flex h-full w-full items-center justify-center text-neutral-400'>
-                  <svg class='h-16 w-16' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                </div>
-              {% endif %}
-            </a>
-          </div>
-
-          <!-- Product Info -->
-          <div class='p-4'>
-            <!-- Product Type -->
-            {% if product.type != blank %}
-              <p class='mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500'>{{ product.type }}</p>
-            {% endif %}
-
-            <!-- Product Title -->
-            <h3 class='mb-2 text-lg font-semibold text-neutral-900'>
-              <a href='{{ product.url }}' class='line-clamp-2 transition-colors hover:text-neutral-600'>
-                {{ product.title }}
-              </a>
-            </h3>
-
-            <!-- Product Price -->
-            <div class='flex items-center justify-between'>
-              <div class='flex items-center space-x-2'>
-                {% if product.compare_at_price > product.price %}
-                  <span class='text-lg font-bold text-neutral-900'>{{ product.price | money }}</span>
-                  <span class='text-sm text-neutral-500 line-through'>{{ product.compare_at_price | money }}</span>
-                {% else %}
-                  <span class='text-lg font-bold text-neutral-900'>{{ product.price | money }}</span>
-                {% endif %}
-              </div>
-
-              <!-- Sale Badge -->
-              {% if product.compare_at_price > product.price %}
-                <span class='rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-800'> Sale </span>
-              {% endif %}
-            </div>
-          </div>
-        </div>
+        {% render 'product-card', product: product, image_width: 800, image_height: 400 %}
       {% endfor %}
     </div>
 

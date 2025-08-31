@@ -1,0 +1,110 @@
+{% comment %}
+  Button snippet with multiple variants
+  Usage: {% render 'button', label: 'Click me', variant: 'primary', size: 'md', full_width: false, disabled: false %}
+
+  Variants: primary, secondary, outline, ghost
+  Sizes: sm, md, lg, xl
+{% endcomment %}
+
+{% assign variant = variant | default: 'primary' %}
+{% assign size = size | default: 'md' %}
+{% assign full_width = full_width | default: false %}
+{% assign disabled = disabled | default: false %}
+{% assign type = type | default: 'button' %}
+{% assign class = class | default: '' %}
+{% assign href = href | default: '' %}
+{% assign target = target | default: '' %}
+
+{% case variant %}
+  {% when 'primary' %}
+    {% assign variant_classes = 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-900' %}
+  {% when 'secondary' %}
+    {% assign variant_classes = 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus:ring-neutral-500' %}
+  {% when 'outline' %}
+    {% assign variant_classes = 'border border-neutral-300 bg-transparent text-neutral-700 hover:bg-neutral-50 focus:ring-neutral-500' %}
+  {% when 'ghost' %}
+    {% assign variant_classes = 'bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-500' %}
+  {% else %}
+    {% assign variant_classes = 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-900' %}
+{% endcase %}
+
+{% case size %}
+  {% when 'sm' %}
+    {% assign size_classes = 'px-3 py-1.5 text-sm' %}
+  {% when 'md' %}
+    {% assign size_classes = 'px-4 py-2 text-sm' %}
+  {% when 'lg' %}
+    {% assign size_classes = 'px-6 py-3 text-base' %}
+  {% when 'xl' %}
+    {% assign size_classes = 'px-8 py-4 text-lg' %}
+  {% else %}
+    {% assign size_classes = 'px-4 py-2 text-sm' %}
+{% endcase %}
+
+{% assign width_class = '' %}
+{% if full_width %}
+  {% assign width_class = 'w-full' %}
+{% endif %}
+
+{% assign disabled_class = '' %}
+{% if disabled %}
+  {% assign disabled_class = 'opacity-50 cursor-not-allowed' %}
+{% endif %}
+
+{% if href != '' %}
+  <a
+    href='{{ href }}'
+    {% if target %}
+      target='{{ target }}'
+    {% endif %}
+    class='inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
+    {% if data_action %}
+      data-action='{{ data_action }}'
+    {% endif %}
+    {% if data_item_key %}
+      data-item-key='{{ data_item_key }}'
+    {% endif %}
+    {% if onclick %}
+      onclick='{{ onclick }}'
+    {% endif %}
+  >
+{% else %}
+  <button
+    class='inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ variant_classes }} {{ size_classes }} {{ width_class }} {{ disabled_class }} {{ class }}'
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if type == 'submit' %}
+      type='submit'
+    {% endif %}
+    {% if type == 'button' %}
+      type='button'
+    {% endif %}
+    {% if type == 'reset' %}
+      type='reset'
+    {% endif %}
+    {% if data_action %}
+      data-action='{{ data_action }}'
+    {% endif %}
+    {% if data_item_key %}
+      data-item-key='{{ data_item_key }}'
+    {% endif %}
+    {% if onclick %}
+      onclick='{{ onclick }}'
+    {% endif %}
+  >
+{% endif %}
+{% if icon_left %}
+  <svg class='mr-2 h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ icon_left }}"></path>
+  </svg>
+{% endif %}
+
+{{ label }}
+
+{% if icon_right %}
+  <svg class='ml-2 h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ icon_right }}"></path>
+  </svg>
+{% endif %}
+{% if href != '' %}</a>{% else %}</button>{% endif %}
