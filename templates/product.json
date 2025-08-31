@@ -32,12 +32,7 @@
       "settings": {
         "height": 24
       }
-    },
-    "scents-overview": {
-      "type": "scents-overview",
-      "name": "Scents Overview",
-      "settings": {}
     }
   },
-  "order": ["breadcrumbs", "spacer-002", "product-card-cta", "spacer-003", "scents-overview"]
+  "order": ["breadcrumbs", "spacer-002", "product-card-cta", "spacer-003"]
 }
