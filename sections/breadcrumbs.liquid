@@ -53,20 +53,28 @@
 
 <div class='px-6 py-4'>
   <nav class='text-brand-neutral-600 flex items-center gap-2 text-sm' aria-label='Breadcrumb'>
-    {% render 'link', text: 'Home', url: routes.root_url %}
+    {% if section.settings.show_home %}
+      {% render 'link', text: 'Home', url: routes.root_url %}
+    {% endif %}
 
     {% if breadcrumb_links != blank %}
-      {% render 'chevron' %}
+      {% if section.settings.show_home %}
+        {% render 'chevron' %}
+      {% endif %}
       {% render 'link', text: breadcrumb_links.title, url: breadcrumb_links.url %}
     {% endif %}
 
     {% if breadcrumb_items == 'product' and breadcrumb_links == blank %}
-      {% render 'chevron' %}
+      {% if section.settings.show_home %}
+        {% render 'chevron' %}
+      {% endif %}
       {% render 'link', text: 'Shop', url: '/collections/all' %}
     {% endif %}
 
     {% if current_title != 'Home' %}
-      {% render 'chevron' %}
+      {% if section.settings.show_home or breadcrumb_links != blank or breadcrumb_items == 'product' %}
+        {% render 'chevron' %}
+      {% endif %}
       <span class='text-brand-neutral-900 font-medium' aria-current='page'>
         {% if current_title == 'Products' %}
           Shop
@@ -86,12 +94,6 @@
       "type": "checkbox",
       "id": "show_home",
       "label": "Show Home link",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_collection_links",
-      "label": "Show collection links for products",
       "default": true
     }
   ],
