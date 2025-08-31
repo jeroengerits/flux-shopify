@@ -1,0 +1,39 @@
+<div class='flex items-center justify-center px-6 py-32'>
+  <div class='mx-auto max-w-sm text-center'>
+    <h1 class='text-brand-neutral-800 mb-2 text-6xl font-black'>
+      {{ section.settings.code }}
+    </h1>
+    {% render 'page-title', text: section.settings.title %}
+    {% render 'paragraph', text: section.settings.message %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Error",
+  "settings": [
+    {
+      "id": "code",
+      "type": "number",
+      "label": "Code"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "id": "message",
+      "type": "text",
+      "label": "Message"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Error",
+      "category": "Application"
+    }
+  ]
+}
+{% endschema %}
+"message": "Page not found",
