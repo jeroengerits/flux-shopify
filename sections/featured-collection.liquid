@@ -1,0 +1,53 @@
+{% liquid
+  assign display_collection = section.settings.selected_collection | default: collection
+  assign products_per_page = section.settings.products_per_page | default: 24
+%}
+
+<div class="p-6">
+  {% if section.settings.show_collection_title %}
+    <h1 class="py-6 text-sm  font-normal uppercase tracking-widest text-neutral-500">{{ display_collection.title }}</h1>
+  {% endif %}
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {% for product in display_collection.products limit: products_per_page %}
+        {{  product.title }}
+      {% comment %}{% render 'product-card', product: product, image_width: 400, image_height: 300 %}{% endcomment %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "description": "A section for featured collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "selected_collection",
+      "label": "Collection to display",
+      "info": "Select which collection to show. Leave empty to use the current page's collection."
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "default": 6,
+      "info": "Number of products to show per page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_title",
+      "label": "Show collection title",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
