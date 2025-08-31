@@ -1,32 +1,32 @@
-<header role="banner" class="p-6">
-    <div class=" flex  justify-between items-center">
-        <div class="flex justify-between items-center">
-            <div class="font-medium text-3xl">
-                <a href="{{ routes.root_url }}" class="lowercase">
-                    {{ shop.name }}
-                </a>
-            </div>
-        </div>
-        <div role="navigation" class="menu flex items-center justify-between gap-4">
-            <ul class="flex text-sm gap-4 items-center justify-between mr-4">
-                {% for link in linklists.main-menu.links %}
-                    <li>
-                        <a href="{{ link.url }}">{{ link.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-            <ul class="flex text-sm gap-4 items-center justify-between">
-                <li>
-                    <a href="{{ routes.cart_url }}" class="text-neutral-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<header role="banner" class="px-9 pb-6 pt-5">
+  <div class="flex items-center justify-between">
+    <div class=" flex items-center justify-between">
+      <div class="text-3xl font-medium">
+        <a href="{{ routes.root_url }}" class="lowercase">
+          {{ shop.name }}
+        </a>
+      </div>
     </div>
+    <div role="navigation" class="menu flex items-center justify-between gap-4">
+      <ul class="mr-4 flex items-center justify-between gap-4 text-sm">
+        {% for link in linklists['main-menu'].links %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul class="flex items-center justify-between gap-4 text-sm">
+        <li>
+          <a href="{{ routes.cart_url }}" class="text-neutral-700">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
 
 {% schema %}

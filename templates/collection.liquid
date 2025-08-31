@@ -8,11 +8,13 @@
   <div class="">
     <div class="px-6 pb-6">
       <div class="">
-        <h1 class="text-md font-normal text-neutral-800 mb-2">{{ collection.title }}</h1>
+        <h1 class="text-md mb-2 font-normal text-neutral-800">{{ collection.title }}</h1>
         {% if collection.description != blank %}
-          <p class="text-sm text-neutral-600 max-w-3xl mx-auto">{{ collection.description }}</p>
+          <p class="mx-auto max-w-3xl text-sm text-neutral-600">{{ collection.description }}</p>
         {% endif %}
-        <p class="text-xs text-neutral-500 mt-2">{{ collection.products.size }} product{% if collection.products.size != 1 %}s{% endif %}</p>
+        <p class="mt-2 text-xs text-neutral-500">
+          {{ collection.products.size }} product{% if collection.products.size != 1 %}s{% endif %}
+        </p>
       </div>
     </div>
   </div>
@@ -20,22 +22,24 @@
   <!-- Main Content -->
   <div class="px-6">
     <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {% for product in collection.products %}
-        <div class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
+        <div class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
           <!-- Product Image -->
           <div class="aspect-square bg-neutral-100">
             <a href="{{ product.url }}" class="block h-full">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 400, crop: 'center' }}" 
-                     alt="{{ product.featured_image.alt | escape }}" 
-                     loading="lazy"
-                     width="400" 
-                     height="400"
-                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                <img
+                  src="{{ product.featured_image | image_url: width: 400, crop: 'center' }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                  class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                >
               {% else %}
-                <div class="w-full h-full flex items-center justify-center text-neutral-400">
-                  <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-full w-full items-center justify-center text-neutral-400">
+                  <svg class="h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
                 </div>
@@ -47,12 +51,12 @@
           <div class="p-4">
             <!-- Product Type -->
             {% if product.type != blank %}
-              <p class="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">{{ product.type }}</p>
+              <p class="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500">{{ product.type }}</p>
             {% endif %}
 
             <!-- Product Title -->
-            <h3 class="text-lg font-semibold text-neutral-900 mb-2">
-              <a href="{{ product.url }}" class="hover:text-neutral-600 transition-colors line-clamp-2">
+            <h3 class="mb-2 text-lg font-semibold text-neutral-900">
+              <a href="{{ product.url }}" class="line-clamp-2 transition-colors hover:text-neutral-600">
                 {{ product.title }}
               </a>
             </h3>
@@ -67,12 +71,10 @@
                   <span class="text-lg font-bold text-neutral-900">{{ product.price | money }}</span>
                 {% endif %}
               </div>
-              
+
               <!-- Sale Badge -->
               {% if product.compare_at_price > product.price %}
-                <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                  Sale
-                </span>
+                <span class="rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-800"> Sale </span>
               {% endif %}
             </div>
           </div>
@@ -85,25 +87,34 @@
       <div class="mt-12 flex justify-center">
         <nav class="flex items-center space-x-2">
           {% if paginate.previous %}
-            <a href="{{ paginate.previous.url }}" class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+            <a
+              href="{{ paginate.previous.url }}"
+              class="rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-700"
+            >
               Previous
             </a>
           {% endif %}
 
           {% for part in paginate.parts %}
             {% if part.is_link %}
-              <a href="{{ part.url }}" class="px-3 py-2 text-sm text-neutral-700 hover:text-neutral-900 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+              <a
+                href="{{ part.url }}"
+                class="rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
+              >
                 {{ part.title }}
               </a>
             {% else %}
-              <span class="px-3 py-2 text-sm text-neutral-500 bg-neutral-100 border border-neutral-300 rounded-md">
+              <span class="rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-500">
                 {{ part.title }}
               </span>
             {% endif %}
           {% endfor %}
 
           {% if paginate.next %}
-            <a href="{{ paginate.next.url }}" class="px-3 py-2 text-sm text-neutral-500 hover:text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 transition-colors">
+            <a
+              href="{{ paginate.next.url }}"
+              class="rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-700"
+            >
               Next
             </a>
           {% endif %}
