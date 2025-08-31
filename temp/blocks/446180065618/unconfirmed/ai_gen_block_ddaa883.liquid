@@ -1,7 +1,6 @@
 {% doc %}
   @prompt
-    a grid of products like the collection page
-
+  a grid of products like the collection page
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -192,7 +191,8 @@
                 <img
                   src="{{ product.featured_image | image_url: width: 600}}"
                   alt="{{ product.featured_image.alt | escape }}"
-                  class="ai-product-grid__image-{{ ai_gen_id }}"loading="lazy"
+                  class="ai-product-grid__image-{{ ai_gen_id }}"
+                  loading="lazy"
                   width="600"
                   height="{{600 | divided_by: block.settings.image_ratio }}"
                 >
@@ -216,7 +216,8 @@
                 <div class="ai-product-grid__vendor-{{ ai_gen_id }}">{{ product.vendor }}</div>
               {% endif %}
 
-              <h3 class="ai-product-grid__title-item-{{ ai_gen_id }}">{{ product.title }}</h3><div class="ai-product-grid__price-{{ ai_gen_id }}">
+              <h3 class="ai-product-grid__title-item-{{ ai_gen_id }}">{{ product.title }}</h3>
+              <div class="ai-product-grid__price-{{ ai_gen_id }}">
                 <span class="ai-product-grid__price-current-{{ ai_gen_id }}">
                   {{ product.price | money }}
                 </span>
@@ -225,7 +226,8 @@
                     {{ product.compare_at_price | money }}
                   </span>
                 {% endif %}
-              </div></div>
+              </div>
+            </div>
           </a>
         {% endfor %}
       </div>

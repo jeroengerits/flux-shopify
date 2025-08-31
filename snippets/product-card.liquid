@@ -4,18 +4,22 @@
 {% endcomment %}
 
 <article>
-  <a href="{{ product.url }}" class="rounded-xl bg-white border border-neutral-200 block overflow-hidden hover:shadow-sm transition-shadow group">
-
+  <a
+    href="{{ product.url }}"
+    class="group block overflow-hidden rounded-xl border border-neutral-200 bg-white transition-shadow hover:shadow-sm"
+  >
     <!-- Product Image -->
     <div class="overflow-hidden">
       {% if product.featured_image %}
-        <img src="{{ product.featured_image | image_url: width: image_width, height: image_height, crop: 'center' }}"
-             width="{{ image_width }}"
-             height="{{ image_height }}"
-             alt="{{ product.title | escape }}"
-             loading="lazy"
-             decoding="async"
-             class="group-hover:scale-110  transition-transform">
+        <img
+          src="{{ product.featured_image | image_url: width: image_width, height: image_height, crop: 'center' }}"
+          width="{{ image_width }}"
+          height="{{ image_height }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          decoding="async"
+          class="transition-transform  group-hover:scale-110"
+        >
       {% else %}
         <div>
           <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,18 +32,15 @@
 
     <!-- Product Info -->
     <div class="px-4 py-3">
-      <div class="flex flex-row justify-between items-start">
+      <div class="flex flex-row items-start justify-between">
         <div>
-            <!-- Product Title -->
-        <h3 class="text-md font-semibold">
+          <!-- Product Title -->
+          <h3 class="text-md font-semibold">
             {{ product.title | escape }}
           </h3>
 
-
           <!-- Type -->
-            <p class="text-sm text-neutral-400">{{ product.type | default: 'Unknown Type' }}</p>
-
-
+          <p class="text-sm text-neutral-400">{{ product.type | default: 'Unknown Type' }}</p>
         </div>
 
         <!-- Price -->
@@ -47,7 +48,6 @@
           <span class="text-base font-normal">
             {{ product.price | money }}
           </span>
-
         </div>
       </div>
     </div>

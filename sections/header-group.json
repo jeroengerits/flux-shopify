@@ -17,7 +17,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "header"
-  ]
+  "order": ["header"]
 }
