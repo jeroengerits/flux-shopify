@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "name": "Default Page",
   "sections": {
     "breadcrumb": {
       "type": "breadcrumb",

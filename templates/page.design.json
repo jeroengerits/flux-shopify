@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "name": "Design System Page",
   "sections": {
     "breadcrumb": {
       "type": "breadcrumb",
