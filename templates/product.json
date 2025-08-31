@@ -9,9 +9,9 @@
  */
 {
   "sections": {
-    "breadcrumb": {
-      "type": "breadcrumb",
-      "name": "Breadcrumb",
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
       "settings": {}
     },
     "spacer": {
@@ -32,5 +32,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumb", "spacer", "product-card-cta", "scents-overview"]
+  "order": ["breadcrumbs", "spacer", "product-card-cta", "scents-overview"]
 }

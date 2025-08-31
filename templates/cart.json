@@ -9,9 +9,9 @@
  */
 {
   "sections": {
-    "breadcrumb": {
-      "type": "breadcrumb",
-      "name": "Breadcrumb",
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
       "settings": {}
     },
     "cart": {
@@ -20,5 +20,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumb", "cart"]
+  "order": ["breadcrumbs", "cart"]
 }

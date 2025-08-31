@@ -9,9 +9,9 @@
  */
 {
   "sections": {
-    "breadcrumb": {
-      "type": "breadcrumb",
-      "name": "Breadcrumb",
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
       "settings": {}
     },
     "spacer": {
@@ -27,5 +27,5 @@
       "settings": {}
     }
   },
-  "order": ["breadcrumb", "spacer", "page"]
+  "order": ["breadcrumbs", "spacer", "page"]
 }
