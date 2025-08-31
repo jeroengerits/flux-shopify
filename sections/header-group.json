@@ -13,9 +13,11 @@
   "sections": {
     "header": {
       "type": "header",
-      "name": "Header",
+      "name": "Navigation",
       "settings": {}
     }
   },
-  "order": ["header"]
+  "order": [
+    "header"
+  ]
 }
