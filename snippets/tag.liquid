@@ -1,0 +1,72 @@
+{% comment %}
+  Tag snippet with variants, sizes, and colors
+  Usage: {% render 'tag', text: 'Tag Text', variant: 'default', size: 'sm', color: 'neutral' %}
+
+  Variants: default, rounded, pill, outline
+  Sizes: xs, sm, md, lg
+  Colors: neutral, primary, secondary, success, warning, error
+{% endcomment %}
+
+{% assign variant = variant | default: 'default' %}
+{% assign size = size | default: 'sm' %}
+{% assign color = color | default: 'neutral' %}
+
+{% case variant %}
+  {% when 'default' %}
+    {% assign variant_classes = 'inline-block rounded-lg' %}
+  {% when 'rounded' %}
+    {% assign variant_classes = 'inline-block rounded' %}
+  {% when 'pill' %}
+    {% assign variant_classes = 'inline-block rounded-full' %}
+  {% when 'outline' %}
+    {% assign variant_classes = 'inline-block border rounded-lg' %}
+  {% else %}
+    {% assign variant_classes = 'inline-block' %}
+{% endcase %}
+
+{% case size %}
+  {% when 'xs' %}
+    {% assign size_classes = 'px-1.5 py-0.5 text-xs' %}
+  {% when 'sm' %}
+    {% assign size_classes = 'px-2 py-1 text-xs' %}
+  {% when 'md' %}
+    {% assign size_classes = 'px-3 py-1.5 text-sm' %}
+  {% when 'lg' %}
+    {% assign size_classes = 'px-4 py-2 text-base' %}
+  {% else %}
+    {% assign size_classes = 'px-2 py-1 text-xs' %}
+{% endcase %}
+
+{% case color %}
+  {% when 'neutral' %}
+    {% assign color_classes = 'bg-brand-neutral-200 text-brand-neutral-800' %}
+    {% assign outline_classes = 'border-brand-neutral-300 text-brand-neutral-700' %}
+  {% when 'primary' %}
+    {% assign color_classes = 'bg-brand-primary text-white' %}
+    {% assign outline_classes = 'border-brand-primary text-brand-primary' %}
+  {% when 'secondary' %}
+    {% assign color_classes = 'bg-brand-secondary text-white' %}
+    {% assign outline_classes = 'border-brand-secondary text-brand-secondary' %}
+  {% when 'success' %}
+    {% assign color_classes = 'bg-brand-success text-white' %}
+    {% assign outline_classes = 'border-brand-success text-brand-success' %}
+  {% when 'warning' %}
+    {% assign color_classes = 'bg-brand-warning text-white' %}
+    {% assign outline_classes = 'border-brand-warning text-brand-warning' %}
+  {% when 'error' %}
+    {% assign color_classes = 'bg-brand-error text-white' %}
+    {% assign outline_classes = 'border-brand-error text-brand-error' %}
+  {% else %}
+    {% assign color_classes = 'bg-brand-neutral-200 text-brand-neutral-800' %}
+    {% assign outline_classes = 'border-brand-neutral-300 text-brand-neutral-700' %}
+{% endcase %}
+
+{% if variant == 'outline' %}
+  <span class='{{ variant_classes }} {{ size_classes }} {{ outline_classes }} font-medium'>
+    {{ text }}
+  </span>
+{% else %}
+  <span class='{{ variant_classes }} {{ size_classes }} {{ color_classes }} font-medium'>
+    {{ text }}
+  </span>
+{% endif %}

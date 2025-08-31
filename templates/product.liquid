@@ -21,8 +21,38 @@
       {% render 'item-price', amount: product.price, size: '2xl', weight: 'bold', color: 'primary' %}
     </div>
 
-    <div class='mb-6 mt-4'>
+    <div class=' mb-4 mt-4'>
       {% render 'paragraph', text: product.description %}
+    </div>
+
+    <div class='mb-6 flex flex-wrap items-center justify-start gap-2'>
+      <!-- Seasons -->
+      {% if product.metafields.shopify.season %}
+        {% for season in product.metafields.shopify.season.value %}
+          {% render 'tag', text: season.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Occasions -->
+      {% if product.metafields.shopify.occasion %}
+        {% for occasion in product.metafields.shopify.occasion.value %}
+          {% render 'tag', text: occasion.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Scents -->
+      {% if product.metafields.shopify.scent %}
+        {% for scent in product.metafields.shopify.scent.value %}
+          {% render 'tag', text: scent.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Target Gender -->
+      {% if product.metafields.shopify['target-gender'] %}
+        {% for gender in product.metafields.shopify['target-gender'].value %}
+          {% render 'tag', text: gender.label, variant: 'outline', size: 'sm', color: 'secondary' %}
+        {% endfor %}
+      {% endif %}
     </div>
 
     {% form 'product', product %}
