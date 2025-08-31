@@ -20,8 +20,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "breadcrumb",
-    "cart"
-  ]
+  "order": ["breadcrumb", "cart"]
 }

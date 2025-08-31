@@ -25,9 +25,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "breadcrumb",
-    "product",
-    "scents-overview"
-  ]
+  "order": ["breadcrumb", "product", "scents-overview"]
 }
