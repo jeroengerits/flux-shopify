@@ -10,7 +10,7 @@
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     {% for product in display_collection.products limit: products_per_page %}
         {{  product.title }}
-      {% comment %}{% render 'product-card', product: product, image_width: 400, image_height: 300 %}{% endcomment %}
+      {% render 'product-card', product: product, image_width: 400, image_height: 300 %}
     {% endfor %}
   </div>
 </div>
