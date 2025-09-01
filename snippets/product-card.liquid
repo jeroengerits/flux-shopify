@@ -21,7 +21,7 @@
   <a
     href='{{ product.url }}'
     class='border-brand-neutral-200 hover:border-brand-neutral-300 focus-visible:ring-brand-accent block overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
-    aria-label='{{ product.title | escape }}'
+    aria-labelledby='product-title-{{ product.id }}'
   >
     <!-- Product Image Container -->
     <div class='bg-brand-neutral-50 relative aspect-square overflow-hidden'>
@@ -62,13 +62,17 @@
       <div class='space-y-2'>
         <!-- Title and Type Row -->
         <div class='flex flex-col gap-1'>
-          {% render 'item-title',
-            text: product.title,
-            class: 'group-hover:text-brand-accent line-clamp-2 transition-colors duration-200'
-          %}
+          <h3
+            id='product-title-{{ product.id }}'
+            class='text-brand-neutral-900 group-hover:text-brand-accent line-clamp-2 font-medium transition-colors duration-200'
+          >
+            {{ product.title }}
+          </h3>
 
           {% if show_type and product.type %}
-            {% render 'item-subtitle', text: product.type %}
+            <p class='text-brand-neutral-500 text-sm'>
+              {{ product.type }}
+            </p>
           {% endif %}
         </div>
 
@@ -77,21 +81,24 @@
           <div class='flex items-center justify-between'>
             <div class='flex items-center gap-2'>
               {% if product.compare_at_price > product.price %}
-                {% render 'item-price',
-                  amount: product.compare_at_price,
-                  size: 'sm',
-                  color: 'muted',
-                  class: 'line-through'
-                %}
-                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'primary' %}
+                <span class='text-brand-neutral-500 text-sm line-through'>
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class='text-brand-success text-lg font-semibold'>
+                  {{ product.price | money }}
+                </span>
               {% else %}
-                {% render 'item-price', amount: product.price, size: 'lg', weight: 'semibold', color: 'muted' %}
+                <span class='text-brand-neutral-900 text-lg font-semibold'>
+                  {{ product.price | money }}
+                </span>
               {% endif %}
             </div>
 
             <!-- Availability Badge -->
             {% unless product.available %}
-              {% render 'tag', text: 'Out of Stock', variant: 'pill', size: 'sm', color: 'error' %}
+              <span class='bg-brand-error/10 text-brand-error inline-flex items-center rounded-full px-2 py-1 text-xs font-medium'>
+                Out of Stock
+              </span>
             {% endunless %}
           </div>
         {% endif %}

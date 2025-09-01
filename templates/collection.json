@@ -9,18 +9,18 @@
       "type": "spacer",
       "name": "Spacer",
       "settings": {
-        "height": 24
+        "height": 32
       }
     },
-    "all_products": {
+    "in_stock": {
       "type": "collection",
-      "name": "All Products",
+      "name": "In Stock",
       "settings": {
-        "selected_collection": "all",
+        "selected_collection": "stock",
         "products_per_page": 24,
         "show_collection_title": false
       }
     }
   },
-  "order": ["breadcrumbs", "spacer-002", "all_products"]
+  "order": ["breadcrumbs", "spacer-002", "in_stock"]
 }

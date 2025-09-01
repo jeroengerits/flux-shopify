@@ -1,6 +1,6 @@
 <header
   role='banner'
-  class='fixed left-0 right-0 top-0 z-50 z-50 h-[80px] bg-white/50 px-6 pb-6 pt-5 backdrop-blur-lg'
+  class='fixed left-0 right-0 top-0 z-50 z-50 h-[80px] bg-white/50 px-8 pb-6 pt-5 backdrop-blur-lg'
 >
   <div class='flex h-full items-center justify-between'>
     <!-- Logo/Brand -->
@@ -11,7 +11,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav role='navigation' aria-label='Main navigation' class='flex items-center gap-6'>
+    <nav role='navigation' aria-label='Main navigation' class='mr-3 flex items-center gap-6'>
       <!-- Main Menu -->
       {% if linklists['main-menu'].links.size > 0 %}
         <ul class='hidden items-center gap-6 text-sm md:flex' role='menubar'>
@@ -39,7 +39,6 @@
           class='text-brand-neutral-700 hover:text-brand-neutral-900 focus-visible:ring-brand-accent flex items-center gap-2 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
           aria-label='Shopping cart ({{ cart.item_count }} items)'
         >
-          <span class='hidden sm:inline'>Cart</span>
           {% render 'cart-icon', amount: cart.item_count, show_label: false %}
           {% if cart.item_count > 0 %}
             <span class='sr-only'>({{ cart.item_count }} items)</span>

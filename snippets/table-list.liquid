@@ -1,0 +1,126 @@
+{% comment %}
+  Table List snippet that displays key-value pairs in a clean table format
+
+  Usage: {% render 'table-list', data: array_of_objects, key_field: 'key', value_field: 'value', variant: 'default', size: 'md' %}
+
+  Parameters:
+  - data: Array of objects or key-value pairs (required)
+  - key_field: Field name for the key (default: 'key')
+  - value_field: Field name for the value (default: 'value')
+  - variant: default, bordered, striped, compact (default: 'default')
+  - size: sm, md, lg (default: 'md')
+  - class: Additional CSS classes (optional)
+  - key_width: Width of the key column (default: 'w-24')
+
+  Example data format:
+  [
+    { "key": "Gender", "value": "Unisex" },
+    { "key": "Season", "value": "All Year" }
+  ]
+
+  Or simple array format:
+  [
+    ["Gender", "Unisex"],
+    ["Season", "All Year"]
+  ]
+{% endcomment %}
+
+{% comment %} Set default values {% endcomment %}
+{% assign variant = variant | default: 'default' %}
+{% assign size = size | default: 'md' %}
+{% assign class = class | default: '' %}
+{% assign key_width = key_width | default: 'w-24' %}
+{% assign key_field = key_field | default: 'key' %}
+{% assign value_field = value_field | default: 'value' %}
+
+{% comment %} Get variant-specific classes {% endcomment %}
+{% case variant %}
+  {% when 'default' %}
+    {% assign container_classes = 'border-brand-neutral-200 rounded-md border' %}
+    {% assign row_classes = 'border-brand-neutral-200 flex flex-row items-center justify-start border-b last:border-b-0' %}
+  {% when 'bordered' %}
+    {% assign container_classes = 'border-brand-neutral-200 rounded-md border' %}
+    {% assign row_classes = 'border-brand-neutral-200 flex flex-row items-center justify-start border-b last:border-b-0' %}
+  {% when 'striped' %}
+    {% assign container_classes = 'rounded-md overflow-hidden' %}
+    {% assign row_classes = 'flex flex-row items-center justify-start' %}
+  {% when 'compact' %}
+    {% assign container_classes = 'rounded-md' %}
+    {% assign row_classes = 'flex flex-row items-center justify-start' %}
+  {% else %}
+    {% assign container_classes = 'border-brand-neutral-200 rounded-md border' %}
+    {% assign row_classes = 'border-brand-neutral-200 flex flex-row items-center justify-start border-b last:border-b-0' %}
+{% endcase %}
+
+{% comment %} Get size-specific classes {% endcomment %}
+{% case size %}
+  {% when 'sm' %}
+    {% assign padding_classes = 'px-2 py-1' %}
+    {% assign text_classes = 'text-xs' %}
+  {% when 'md' %}
+    {% assign padding_classes = 'px-3 py-1.5' %}
+    {% assign text_classes = 'text-sm' %}
+  {% when 'lg' %}
+    {% assign padding_classes = 'px-4 py-2' %}
+    {% assign text_classes = 'text-base' %}
+  {% else %}
+    {% assign padding_classes = 'px-3 py-1.5' %}
+    {% assign text_classes = 'text-sm' %}
+{% endcase %}
+
+{% comment %} Render table {% endcomment %}
+<div class='{{ container_classes }} {{ class }}'>
+  {% for item in data %}
+    {% assign row_index = forloop.index0 %}
+
+    {% comment %} Handle different data formats {% endcomment %}
+    {% if item[key_field] and item[value_field] %}
+      {% comment %} Object format with key_field and value_field {% endcomment %}
+      {% assign key = item[key_field] %}
+      {% assign value = item[value_field] %}
+    {% elsif item[0] and item[1] %}
+      {% comment %} Array format [key, value] {% endcomment %}
+      {% assign key = item[0] %}
+      {% assign value = item[1] %}
+    {% else %}
+      {% comment %} Fallback to direct key-value {% endcomment %}
+      {% assign key = item.key %}
+      {% assign value = item.value %}
+    {% endif %}
+
+    {% comment %} Apply striped variant styling {% endcomment %}
+    {% assign final_row_classes = row_classes %}
+    {% assign row_modulo = row_index | modulo: 2 %}
+    {% if variant == 'striped' and row_modulo == 1 %}
+      {% assign final_row_classes = final_row_classes | append: ' bg-brand-neutral-50' %}
+    {% endif %}
+
+    <div class='{{ final_row_classes }} {{ padding_classes }} leading-none'>
+      <div class='{{ key_width }} {{ text_classes }} text-brand-neutral-500 font-medium'>
+        {{ key }}
+      </div>
+      <div class='{{ text_classes }} text-brand-neutral-700 flex-1'>
+        {%- comment -%} Ensure we work with a string for contains/split {%- endcomment -%}
+        {% assign value_str = value | append: '' %}
+
+        {% if value_str contains ',' or value_str contains ' - ' or value_str contains ' · ' %}
+          {%- comment -%} Pick the right delimiter {%- endcomment -%}
+          {% if value_str contains ' - ' %}
+            {% assign parts = value_str | split: ' - ' %}
+          {% elsif value_str contains ' · ' %}
+            {% assign parts = value_str | split: ' · ' %}
+          {% else %}
+            {% assign parts = value_str | split: ',' %}
+          {% endif %}
+
+          {% for part in parts %}
+            {{ part | strip -}}
+            {%- unless forloop.last %} - {% endunless %}
+          {% endfor %}
+        {% else %}
+          {{ value }}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

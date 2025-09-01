@@ -1,0 +1,42 @@
+{% comment %}
+  Example usage of the table-list component
+  This snippet demonstrates different ways to use the table-list component
+{% endcomment %}
+
+{% comment %} Example 1: Simple key-value pairs {% endcomment %}
+<h3 class='text-brand-neutral-700 mb-4 text-lg font-medium'>Simple Key-Value Pairs</h3>
+{%
+  render 'table-list',
+  data: [
+  {"key": "Name", "value": "John Doe"},
+  {"key": "Email", "value": "john@example.com"},
+  {"key": "Phone", "value": "+1 (555) 123-4567"}
+  ]
+%}
+
+{% comment %} Example 2: Array format {% endcomment %}
+<h3 class='text-brand-neutral-700 mb-4 mt-8 text-lg font-medium'>Array Format</h3>
+{%
+  render 'table-list',
+  data: [
+  ["Product", "Premium Widget"],
+  ["Price", "$29.99"],
+  ["Category", "Electronics"]
+  ],
+  variant: 'striped'
+%}
+
+{% comment %} Example 3: With custom styling {% endcomment %}
+<h3 class='text-brand-neutral-700 mb-4 mt-8 text-lg font-medium'>Custom Styling</h3>
+{%
+  render 'table-list',
+  data: [
+  {"key": "Status", "value": "Active"},
+  {"key": "Last Updated", "value": "2024-01-15"},
+  {"key": "Priority", "value": "High"}
+  ],
+  variant: 'bordered',
+  size: 'lg',
+  key_width: 'w-32',
+  class: 'shadow-lg'
+%}

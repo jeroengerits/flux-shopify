@@ -26,21 +26,21 @@
 
 {% case size %}
   {% when 'xs' %}
-    {% assign size_classes = 'px-1.5 py-0.5 text-xs' %}
+    {% assign size_classes = 'px-2 py-0.5 text-xs' %}
   {% when 'sm' %}
-    {% assign size_classes = 'px-2 py-1 text-xs' %}
+    {% assign size_classes = 'px-3 py-1 text-xs' %}
   {% when 'md' %}
-    {% assign size_classes = 'px-3 py-1.5 text-sm' %}
+    {% assign size_classes = 'px-4 py-1.5 text-sm' %}
   {% when 'lg' %}
-    {% assign size_classes = 'px-4 py-2 text-base' %}
+    {% assign size_classes = 'px-5 py-2 text-base' %}
   {% else %}
-    {% assign size_classes = 'px-2 py-1 text-xs' %}
+    {% assign size_classes = 'px-2 py-0.5 text-xs' %}
 {% endcase %}
 
 {% case color %}
   {% when 'neutral' %}
-    {% assign color_classes = 'bg-brand-neutral-200 text-brand-neutral-800' %}
-    {% assign outline_classes = 'border-brand-neutral-300 text-brand-neutral-700' %}
+    {% assign color_classes = 'bg-brand-neutral-200 text-brand-neutral-600' %}
+    {% assign outline_classes = 'border-brand-neutral-300 text-brand-neutral-600' %}
   {% when 'primary' %}
     {% assign color_classes = 'bg-brand-primary text-white' %}
     {% assign outline_classes = 'border-brand-primary text-brand-primary' %}
